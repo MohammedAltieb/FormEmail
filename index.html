@@ -175,6 +175,7 @@
                     <textarea id="message" name="message" required></textarea>
                 </div>
                 
+                <input type="hidden" name="_subject" value="بيانات جديدة من النموذج">
                 <button type="submit">إرسال البيانات</button>
             </form>
             
@@ -190,19 +191,17 @@
 
     <script>
         document.getElementById('dataForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+            // لن نمنع الإرسال الآن - سيتم الإرسال إلى Formspree
+            // e.preventDefault();
             
-            // في بيئة حقيقية، سنقوم بإرسال النموذج إلى Formspree
-            // ولكن في هذا المثال، سنعرض رسالة النجاح فقط
+            // عرض رسالة النجاح
             document.getElementById('successMessage').style.display = 'block';
             
-            // إعادة تعيين النموذج
+            // إخفاء الرسالة بعد 5 ثوان
             setTimeout(function() {
-                document.getElementById('dataForm').reset();
                 document.getElementById('successMessage').style.display = 'none';
             }, 5000);
         });
     </script>
 </body>
-
 </html>
