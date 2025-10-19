@@ -102,16 +102,6 @@
             background: #1a68e8;
         }
         
-        .success-message {
-            background: #d4edda;
-            color: #155724;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 20px;
-            text-align: center;
-            display: none;
-        }
-        
         footer {
             text-align: center;
             margin-top: 30px;
@@ -142,7 +132,8 @@
         </header>
         
         <div class="form-container">
-            <form id="dataForm" action="https://formspree.io/f/xzzjwggd" method="POST">
+            <!-- استبدل YOUR_FORM_ID برابط Formspree الحقيقي -->
+            <form action="https://formspree.io/f/xzzjwggd" method="POST">
                 <div class="form-group">
                     <label for="name">الاسم الكامل</label>
                     <input type="text" id="name" name="name" required>
@@ -175,33 +166,17 @@
                     <textarea id="message" name="message" required></textarea>
                 </div>
                 
+                <!-- هذه المدخلات المخفية مهمة لـ Formspree -->
                 <input type="hidden" name="_subject" value="بيانات جديدة من النموذج">
+                <input type="text" name="_gotcha" style="display:none">
+                
                 <button type="submit">إرسال البيانات</button>
             </form>
-            
-            <div class="success-message" id="successMessage">
-                تم إرسال البيانات بنجاح! شكراً لتواصلك معنا.
-            </div>
         </div>
     </div>
     
     <footer>
         <p>جميع الحقوق محفوظة &copy; 2023</p>
     </footer>
-
-    <script>
-        document.getElementById('dataForm').addEventListener('submit', function(e) {
-            // لن نمنع الإرسال الآن - سيتم الإرسال إلى Formspree
-            // e.preventDefault();
-            
-            // عرض رسالة النجاح
-            document.getElementById('successMessage').style.display = 'block';
-            
-            // إخفاء الرسالة بعد 5 ثوان
-            setTimeout(function() {
-                document.getElementById('successMessage').style.display = 'none';
-            }, 5000);
-        });
-    </script>
 </body>
-</html>
+                        </html>
