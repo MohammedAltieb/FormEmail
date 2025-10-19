@@ -102,6 +102,37 @@
             background: #1a68e8;
         }
         
+        button:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+        }
+        
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            display: none;
+        }
+        
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            display: none;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
         footer {
             text-align: center;
             margin-top: 30px;
@@ -132,8 +163,7 @@
         </header>
         
         <div class="form-container">
-            <!-- استبدل YOUR_FORM_ID برابط Formspree الحقيقي -->
-            <form action="https://formspree.io/f/xzzjwggd" method="POST">
+            <form id="dataForm">
                 <div class="form-group">
                     <label for="name">الاسم الكامل</label>
                     <input type="text" id="name" name="name" required>
@@ -166,17 +196,76 @@
                     <textarea id="message" name="message" required></textarea>
                 </div>
                 
-                <!-- هذه المدخلات المخفية مهمة لـ Formspree -->
-                <input type="hidden" name="_subject" value="بيانات جديدة من النموذج">
-                <input type="text" name="_gotcha" style="display:none">
-                
-                <button type="submit">إرسال البيانات</button>
+                <button type="submit" id="submitBtn">
+                    إرسال البيانات
+                </button>
             </form>
+            
+            <div class="loading" id="loading">
+                ⏳ جاري إرسال البيانات...
+            </div>
+            
+            <div class="success-message" id="successMessage">
+                ✅ تم إرسال البيانات بنجاح! شكراً لتواصلك معنا.
+            </div>
+            
+            <div class="error-message" id="errorMessage">
+                ❌ حدث خطأ في الإرسال. يرجى المحاولة مرة أخرى.
+            </div>
         </div>
     </div>
     
     <footer>
         <p>جميع الحقوق محفوظة &copy; 2023</p>
     </footer>
+
+    <script>
+        document.getElementById('dataForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // نمنع الإرسال العادي
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const loading = document.getElementById('loading');
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            
+            // إخفاء جميع الرسائل
+            successMessage.style.display = 'none';
+            errorMessage.style.display = 'none';
+            
+            // إظهار حالة التحميل
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'جاري الإرسال...';
+            loading.style.display = 'block';
+            
+            // إرسال البيانات باستخدام Fetch API
+            fetch('https://formspree.io/f/xzzjwggd', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json'
+                },
+                body: new FormData(this)
+            })
+            .then(response => {
+                if (response.ok) {
+                    // النجاح
+                    successMessage.style.display = 'block';
+                    document.getElementById('dataForm').reset();
+                } else {
+                    // الخطأ
+                    throw new Error('فشل الإرسال');
+                }
+            })
+            .catch(error => {
+                // خطأ في الشبكة أو الإرسال
+                errorMessage.style.display = 'block';
+            })
+            .finally(() => {
+                // إعادة تعيين الزر وإخفاء التحميل
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'إرسال البيانات';
+                loading.style.display = 'none';
+            });
+        });
+    </script>
 </body>
-                        </html>
+                            </html>
