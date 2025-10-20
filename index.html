@@ -234,12 +234,12 @@
             <h2>الخدمات الإلكترونية</h2>
             <ul class="service-list">
                 <li class="service-item">
-                    <button class="service-btn active" data-service="contact" data-formspree="https://formspree.io/f/xzzjwggd">
+                    <button class="service-btn active" data-service="contact" data-formspree="https://formspree.io/f/xkgqagal">
                         📞 طلب اتصال
                     </button>
                 </li>
                 <li class="service-item">
-                    <button class="service-btn" data-service="support" data-formspree="https://formspree.io/f/xzzjwggd">
+                    <button class="service-btn" data-service="support" data-formspree="">
                         🛠️ دعم فني
                     </button>
                 </li>
@@ -280,7 +280,7 @@
                         <div id="formFields">
                             <!-- النموذج الافتراضي -->
                             <div class="form-group">
-                                <label for="name">الاسم الكامل</label>
+                                <label for="name">للاتصال الاسم الكامل</label>
                                 <input type="text" id="name" name="name" required>
                             </div>
                             
@@ -331,11 +331,11 @@
         // تعريف النماذج المختلفة
         const serviceForms = {
             contact: {
-                title: "طلب اتصال",
+                title: "طلب اتصال"
                 description: "املأ النموذج أدناه وسنقوم بالاتصال بك في أقرب وقت",
-                fields: `
+                fields:
                     <div class="form-group">
-                        <label for="name">الاسم الكامل</label>
+                        <label for="name">الاسم طلب التعريف الكامل</label>
                         <input type="text" id="name" name="name" required>
                     </div>
                     
@@ -359,11 +359,11 @@
                         <label for="message">ملاحظات إضافية</label>
                         <textarea id="message" name="message"></textarea>
                     </div>
-                `
-            },
+                
+            }
             
             support: {
-                title: "الدعم الفني",
+                title: "الدعم الفني"
                 description: "أبلغنا عن المشكلة التقنية وسنقوم بحلها في أقرب وقت",
                 fields: `
                     <div class="form-group">
@@ -527,3 +527,4 @@
                     <div class="form-group">
                         <label for="phone">رقم الهاتف</label>
                         <input type="tel" id="phone" name=
+
