@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نموذج إرسال البيانات</title>
+    <title>نظام الخدمات الإلكترونية</title>
     <style>
         * {
             margin: 0;
@@ -17,7 +17,69 @@
             color: #333;
             line-height: 1.6;
             min-height: 100vh;
+        }
+        
+        .app-container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* القائمة الجانبية */
+        .sidebar {
+            width: 280px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             padding: 20px;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .sidebar h2 {
+            color: #2575fc;
+            margin-bottom: 30px;
+            text-align: center;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #2575fc;
+        }
+        
+        .service-list {
+            list-style: none;
+        }
+        
+        .service-item {
+            margin-bottom: 10px;
+        }
+        
+        .service-btn {
+            width: 100%;
+            padding: 15px;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            text-align: right;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            font-weight: 600;
+            color: #495057;
+        }
+        
+        .service-btn:hover {
+            background: #2575fc;
+            color: white;
+            border-color: #2575fc;
+            transform: translateX(-5px);
+        }
+        
+        .service-btn.active {
+            background: #2575fc;
+            color: white;
+            border-color: #2575fc;
+        }
+        
+        /* المحتوى الرئيسي */
+        .main-content {
+            flex: 1;
+            padding: 30px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -31,6 +93,12 @@
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             overflow: hidden;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         header {
@@ -131,6 +199,8 @@
             display: none;
             text-align: center;
             margin-top: 20px;
+            color: #2575fc;
+            font-size: 18px;
         }
         
         footer {
@@ -140,88 +210,214 @@
             font-size: 0.9rem;
         }
         
-        @media (max-width: 600px) {
-            .container {
-                border-radius: 10px;
+        @media (max-width: 768px) {
+            .app-container {
+                flex-direction: column;
             }
             
-            header h1 {
-                font-size: 1.8rem;
+            .sidebar {
+                width: 100%;
+                order: 2;
             }
             
-            .form-container {
+            .main-content {
+                order: 1;
                 padding: 20px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>نموذج إرسال البيانات</h1>
-            <p>املأ النموذج أدناه وسيتم إرسال البيانات إلى بريدي الإلكتروني</p>
-        </header>
+    <div class="app-container">
+        <!-- القائمة الجانبية -->
+        <aside class="sidebar">
+            <h2>الخدمات الإلكترونية</h2>
+            <ul class="service-list">
+                <li class="service-item">
+                    <button class="service-btn active" data-service="contact">
+                        📞 النموذج الأساسي
+                    </button>
+                </li>
+                <li class="service-item">
+                    <button class="service-btn" data-service="siklif">
+                        🛠️ خدمة سكليف
+                    </button>
+                </li>
+            </ul>
+        </aside>
         
-        <div class="form-container">
-            <form id="dataForm">
-                <div class="form-group">
-                    <label for="name">الاسم الكامل</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
+        <!-- المحتوى الرئيسي -->
+        <main class="main-content">
+            <div class="container">
+                <header>
+                    <h1 id="formTitle">نموذج إرسال البيانات</h1>
+                    <p id="formDescription">املأ النموذج أدناه وسيتم إرسال البيانات إلى بريدي الإلكتروني</p>
+                </header>
                 
-                <div class="form-group">
-                    <label for="email">البريد الإلكتروني</label>
-                    <input type="email" id="email" name="email" required>
+                <div class="form-container">
+                    <form id="dynamicForm">
+                        <!-- سيتم تحميل النموذج هنا ديناميكياً -->
+                        <div id="formFields">
+                            <!-- النموذج الأساسي -->
+                            <div class="form-group">
+                                <label for="name">الاسم الكامل</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">البريد الإلكتروني</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone">رقم الهاتف</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="subject">الموضوع</label>
+                                <select id="subject" name="subject" required>
+                                    <option value="">اختر موضوع الرسالة</option>
+                                    <option value="استفسار">استفسار</option>
+                                    <option value="اقتراح">اقتراح</option>
+                                    <option value="شكوى">شكوى</option>
+                                    <option value="طلب">طلب</option>
+                                    <option value="أخرى">أخرى</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message">الرسالة</label>
+                                <textarea id="message" name="message" required></textarea>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" id="submitBtn">
+                            إرسال البيانات
+                        </button>
+                    </form>
+                    
+                    <div class="loading" id="loading">
+                        ⏳ جاري إرسال البيانات...
+                    </div>
+                    
+                    <div class="success-message" id="successMessage">
+                        ✅ تم إرسال البيانات بنجاح! شكراً لتواصلك معنا.
+                    </div>
+                    
+                    <div class="error-message" id="errorMessage">
+                        ❌ حدث خطأ في الإرسال. يرجى المحاولة مرة أخرى.
+                    </div>
                 </div>
-                
-                <div class="form-group">
-                    <label for="phone">رقم الهاتف</label>
-                    <input type="tel" id="phone" name="phone">
-                </div>
-                
-                <div class="form-group">
-                    <label for="subject">الموضوع</label>
-                    <select id="subject" name="subject" required>
-                        <option value="">اختر موضوع الرسالة</option>
-                        <option value="استفسار">استفسار</option>
-                        <option value="اقتراح">اقتراح</option>
-                        <option value="شكوى">شكوى</option>
-                        <option value="طلب">طلب</option>
-                        <option value="أخرى">أخرى</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="message">الرسالة</label>
-                    <textarea id="message" name="message" required></textarea>
-                </div>
-                
-                <button type="submit" id="submitBtn">
-                    إرسال البيانات
-                </button>
-            </form>
-            
-            <div class="loading" id="loading">
-                ⏳ جاري إرسال البيانات...
             </div>
-            
-            <div class="success-message" id="successMessage">
-                ✅ تم إرسال البيانات بنجاح! شكراً لتواصلك معنا.
-            </div>
-            
-            <div class="error-message" id="errorMessage">
-                ❌ حدث خطأ في الإرسال. يرجى المحاولة مرة أخرى.
-            </div>
-        </div>
+        </main>
     </div>
-    
-    <footer>
-        <p>جميع الحقوق محفوظة &copy; 2023</p>
-    </footer>
 
     <script>
-        document.getElementById('dataForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // نمنع الإرسال العادي
+        // تعريف النماذج المختلفة
+        const serviceForms = {
+            contact: {
+                title: "نموذج إرسال البيانات",
+                description: "املأ النموذج أدناه وسيتم إرسال البيانات إلى بريدي الإلكتروني",
+                fields: `
+                    <div class="form-group">
+                        <label for="name">الاسم الكامل</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">البريد الإلكتروني</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">رقم الهاتف</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">الموضوع</label>
+                        <select id="subject" name="subject" required>
+                            <option value="">اختر موضوع الرسالة</option>
+                            <option value="استفسار">استفسار</option>
+                            <option value="اقتراح">اقتراح</option>
+                            <option value="شكوى">شكوى</option>
+                            <option value="طلب">طلب</option>
+                            <option value="أخرى">أخرى</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">الرسالة</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                `
+            },
+            
+            siklif: {
+                title: "خدمة سكليف",
+                description: "املأ البيانات التالية لطلب خدمة سكليف",
+                fields: `
+                    <div class="form-group">
+                        <label for="siklif_name">الاسم الكامل</label>
+                        <input type="text" id="siklif_name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="siklif_phone">رقم الهاتف</label>
+                        <input type="tel" id="siklif_phone" name="phone" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="siklif_email">البريد الإلكتروني</label>
+                        <input type="email" id="siklif_email" name="email" required>
+                    </div>
+                `
+            }
+        };
+
+        // تغيير الخدمة عند النقر على الزر
+        document.querySelectorAll('.service-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // إزالة النشط من جميع الأزرار
+                document.querySelectorAll('.service-btn').forEach(b => {
+                    b.classList.remove('active');
+                });
+                
+                // إضافة النشط للزر المحدد
+                this.classList.add('active');
+                
+                const service = this.dataset.service;
+                
+                // تحميل النموذج المحدد
+                loadServiceForm(service);
+            });
+        });
+
+        // تحميل النموذج المحدد
+        function loadServiceForm(service) {
+            const formData = serviceForms[service];
+            
+            if (formData) {
+                // تحديث العنوان والوصف
+                document.getElementById('formTitle').textContent = formData.title;
+                document.getElementById('formDescription').textContent = formData.description;
+                
+                // تحديث الحقول
+                document.getElementById('formFields').innerHTML = formData.fields;
+                
+                // تحديث نص زر الإرسال
+                document.getElementById('submitBtn').textContent = `إرسال ${formData.title}`;
+                
+                // إخفاء الرسائل
+                document.getElementById('successMessage').style.display = 'none';
+                document.getElementById('errorMessage').style.display = 'none';
+            }
+        }
+
+        // إرسال النموذج
+        document.getElementById('dynamicForm').addEventListener('submit', function(e) {
+            e.preventDefault();
             
             const submitBtn = document.getElementById('submitBtn');
             const loading = document.getElementById('loading');
@@ -249,7 +445,7 @@
                 if (response.ok) {
                     // النجاح
                     successMessage.style.display = 'block';
-                    document.getElementById('dataForm').reset();
+                    document.getElementById('dynamicForm').reset();
                 } else {
                     // الخطأ
                     throw new Error('فشل الإرسال');
@@ -262,7 +458,7 @@
             .finally(() => {
                 // إعادة تعيين الزر وإخفاء التحميل
                 submitBtn.disabled = false;
-                submitBtn.textContent = 'إرسال البيانات';
+                submitBtn.textContent = `إرسال ${document.getElementById('formTitle').textContent}`;
                 loading.style.display = 'none';
             });
         });
