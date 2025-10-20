@@ -235,7 +235,7 @@
             <ul class="service-list">
                 <li class="service-item">
                     <button class="service-btn active" data-service="contact" data-formspree="https://formspree.io/f/xzzjwggd">
-                        📞 طلب اتصال
+                        📞 طلب سكليف
                     </button>
                 </li>
        <!--        <li class="service-item">
@@ -270,7 +270,7 @@
         <main class="main-content">
             <div class="form-container">
                 <header>
-                    <h1 id="formTitle">طلب اتصال</h1>
+                    <h1 id="formTitle">طلب سكليف</h1>
                     <p id="formDescription">املأ النموذج أدناه وسنقوم بالاتصال بك في أقرب وقت</p>
                 </header>
                 
@@ -526,7 +526,133 @@
                     
                     <div class="form-group">
                         <label for="phone">رقم الهاتف</label>
-                        <input type="tel" id="phone" name=
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">البريد الإلكتروني</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="serviceType">نوع الخدمة المطلوبة</label>
+                        <select id="serviceType" name="serviceType" required>
+                            <option value="">اختر الخدمة</option>
+                            <option value="تصميم موقع">تصميم موقع</option>
+                            <option value="تطبيق جوال">تطبيق جوال</option>
+                            <option value="استضافة">استضافة مواقع</option>
+                            <option value="صيانة">صيانة تقنية</option>
+                            <option value="استشارة">استشارة تقنية</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="budget">الميزانية المتوقعة</label>
+                        <input type="text" id="budget" name="budget">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="projectDetails">تفاصيل المشروع</label>
+                        <textarea id="projectDetails" name="projectDetails" required></textarea>
+                    </div>
+                
+            }
+        };
+
+        // إدارة النماذج والخدمات
+        let currentFormspreeId = 'YOUR_CONTACT_FORM_ID';
+
+        // تغيير الخدمة عند النقر على الزر
+        document.querySelectorAll('.service-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // إزالة النشط من جميع الأزرار
+                document.querySelectorAll('.service-btn').forEach(b => {
+                    b.classList.remove('active');
+                });
+                
+                // إضافة النشط للزر المحدد
+                this.classList.add('active');
+                
+                const service = this.dataset.service;
+                currentFormspreeId = this.dataset.formspree;
+                
+                // تحميل النموذج المحدد
+                loadServiceForm(service);
+            });
+        });
+
+        // تحميل النموذج المحدد
+        function loadServiceForm(service) {
+            const formData = serviceForms[service];
+            
+            if (formData) {
+                // تحديث العنوان والوصف
+                document.getElementById('formTitle').textContent = formData.title;
+                document.getElementById('formDescription').textContent = formData.description;
+                
+                // تحديث الحقول
+                document.getElementById('formFields').innerHTML = formData.fields;
+                
+                // تحديث نص زر الإرسال
+                document.getElementById('submitBtn').textContent = `إرسال ${formData.title}`;
+                
+                // إخفاء الرسائل
+                document.getElementById('successMessage').style.display = 'none';
+                document.getElementById('errorMessage').style.display = 'none';
+            }
+        }
+
+        // إرسال النموذج
+        document.getElementById('dynamicForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const loading = document.getElementById('loading');
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            
+            // إخفاء جميع الرسائل
+            successMessage.style.display = 'none';
+            errorMessage.style.display = 'none';
+            
+            // إظهار حالة التحميل
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'جاري الإرسال...';
+            loading.style.display = 'block';
+            
+            // إرسال البيانات باستخدام Fetch API
+            fetch(`https://formspree.io/f/${currentFormspreeId}`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json'
+                },
+                body: new FormData(this)
+            })
+            .then(response => {
+                if (response.ok) {
+                    // النجاح
+                    successMessage.style.display = 'block';
+                    document.getElementById('dynamicForm').reset();
+                } else {
+                    // الخطأ
+                    throw new Error('فشل الإرسال');
+                }
+            })
+            .catch(error => {
+                // خطأ في الشبكة أو الإرسال
+                errorMessage.style.display = 'block';
+            })
+            .finally(() => {
+                // إعادة تعيين الزر وإخفاء التحميل
+                submitBtn.disabled = false;
+                submitBtn.textContent = `إرسال ${document.getElementById('formTitle').textContent}`;
+                loading.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>
+
 
 
 
