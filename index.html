@@ -23,6 +23,23 @@
             display: flex;
             min-height: 100vh;
         }
+
+
+
+        /* أضف هذا في قسم style */
+.certificate-form {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    border-right: 4px solid #2575fc;
+}
+
+.certificate-form h3 {
+    color: #2575fc;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
         
         /* القائمة الجانبية */
         .sidebar {
@@ -243,6 +260,12 @@
                         🏥 طلب سكليف
                     </button>
                 </li>
+                
+<li class="service-item">
+    <button class="service-btn" data-service="certificates">
+        🎓 الشهادات المهنية
+    </button>
+</li>
             </ul>
         </aside>
         
@@ -478,8 +501,246 @@
                         <input type="email" id="siklif_email" name="email" required>
                     </div>
                 `
-            }
+            },
+
+certificates: {
+    title: "الشهادات المهنية المعتمدة",
+    description: "اختر الشهادة المطلوبة واملأ البيانات",
+    fields: `
+        <div class="form-group">
+            <label for="cert_type">نوع الشهادة المطلوبة *</label>
+            <select id="cert_type" name="certificate_type" required onchange="showCertificateForm(this.value)">
+                <option value="">اختر الشهادة</option>
+                <option value="acls">ACLS - دعم الحياة القلبية المتقدم</option>
+                <option value="cpr">CPR - إنعاش القلب والرئتين</option>
+                <option value="bls">BLS - دعم الحياة الأساسي</option>
+                <option value="pals">PALS - دعم الحياة pediatric المتقدم</option>
+                <option value="nrp">NRP - برنامج إنعاش الوليد</option>
+                <option value="paers">PAERS - Pediatric Advanced Emergency Readiness</option>
+            </select>
+        </div>
+        
+        <!-- سيتم عرض النموذج المحدد هنا -->
+        <div id="certificateFormContainer"></div>
+    `
+        }
+
+            
         };
+
+// أضف هذا الكود بعد serviceForms
+// نماذج الشهادات التفصيلية
+const certificateForms = {
+    acls: {
+        title: "شهادة ACLS - دعم الحياة القلبية المتقدم",
+        fields: `
+            <div class="form-group">
+                <label for="acls_name">الاسم الكامل *</label>
+                <input type="text" id="acls_name" name="full_name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="acls_id">رقم الهوية *</label>
+                <input type="text" id="acls_id" name="national_id" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="acls_phone">رقم الجوال *</label>
+                <input type="tel" id="acls_phone" name="phone" required placeholder="5XXXXXXX">
+            </div>
+            
+            <div class="form-group">
+                <label for="acls_email">البريد الإلكتروني *</label>
+                <input type="email" id="acls_email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="acls_hospital">مكان العمل *</label>
+                <input type="text" id="acls_hospital" name="workplace" required placeholder="المستشفى/المركز الصحي">
+            </div>
+            
+            <div class="form-group">
+                <label for="acls_specialty">التخصص *</label>
+                <input type="text" id="acls_specialty" name="specialty" required placeholder="طبيب/ممرض/فني طوارئ">
+            </div>
+            
+            <div class="form-group">
+                <label for="acls_experience">سنوات الخبرة *</label>
+                <input type="number" id="acls_experience" name="experience_years" min="0" required>
+            </div>
+        `
+    },
+    
+    cpr: {
+        title: "شهادة CPR - إنعاش القلب والرئتين",
+        fields: `
+            <div class="form-group">
+                <label for="cpr_name">الاسم الكامل *</label>
+                <input type="text" id="cpr_name" name="full_name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="cpr_id">رقم الهوية *</label>
+                <input type="text" id="cpr_id" name="national_id" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="cpr_phone">رقم الجوال *</label>
+                <input type="tel" id="cpr_phone" name="phone" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="cpr_email">البريد الإلكتروني *</label>
+                <input type="email" id="cpr_email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="cpr_course_type">نوع الدورة *</label>
+                <select id="cpr_course_type" name="course_type" required>
+                    <option value="">اختر نوع الدورة</option>
+                    <option value="basic">CPR أساسي</option>
+                    <option value="advanced">CPR متقدم</option>
+                    <option value="healthcare">CPR لمقدمي الرعاية الصحية</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="cpr_previous">هل لديك شهادة CPR سابقة؟</label>
+                <select id="cpr_previous" name="previous_cert">
+                    <option value="no">لا</option>
+                    <option value="yes">نعم</option>
+                </select>
+            </div>
+        `
+    },
+    
+    bls: {
+        title: "شهادة BLS - دعم الحياة الأساسي",
+        fields: `
+            <div class="form-group">
+                <label for="bls_name">الاسم الكامل *</label>
+                <input type="text" id="bls_name" name="full_name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="bls_id">رقم الهوية *</label>
+                <input type="text" id="bls_id" name="national_id" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="bls_phone">رقم الجوال *</label>
+                <input type="tel" id="bls_phone" name="phone" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="bls_qualification">المؤهل العلمي *</label>
+                <input type="text" id="bls_qualification" name="qualification" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="bls_work">جهة العمل *</label>
+                <input type="text" id="bls_work" name="workplace" required>
+            </div>
+        `
+    },
+    
+    pals: {
+        title: "شهادة PALS - دعم الحياة Pediatric المتقدم",
+        fields: `
+            <div class="form-group">
+                <label for="pals_name">الاسم الكامل *</label>
+                <input type="text" id="pals_name" name="full_name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="pals_id">رقم الهوية *</label>
+                <input type="text" id="pals_id" name="national_id" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="pals_specialty">التخصص الطبي *</label>
+                <input type="text" id="pals_specialty" name="medical_specialty" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="pals_license">رقم الترخيص الطبي *</label>
+                <input type="text" id="pals_license" name="medical_license" required>
+            </div>
+        `
+    },
+    
+    nrp: {
+        title: "شهادة NRP - برنامج إنعاش الوليد",
+        fields: `
+            <div class="form-group">
+                <label for="nrp_name">الاسم الكامل *</label>
+                <input type="text" id="nrp_name" name="full_name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="nrp_position">المنصب *</label>
+                <select id="nrp_position" name="position" required>
+                    <option value="">اختر المنصب</option>
+                    <option value="doctor">طبيب</option>
+                    <option value="nurse">ممرض/ممرضة</option>
+                    <option value="midwife">قابلة</option>
+                    <option value="respiratory">أخصائي تنفسي</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="nrp_department">القسم *</label>
+                <input type="text" id="nrp_department" name="department" required placeholder="الولادة/العناية المركزة للأطفال">
+            </div>
+        `
+    },
+    
+    paers: {
+        title: "شهادة PAERS - Pediatric Advanced Emergency Readiness",
+        fields: `
+            <div class="form-group">
+                <label for="paers_name">الاسم الكامل *</label>
+                <input type="text" id="paers_name" name="full_name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="paers_emergency">نوع الطوارئ *</label>
+                <select id="paers_emergency" name="emergency_type" required>
+                    <option value="">اختر نوع الطوارئ</option>
+                    <option value="trauma">صدمة</option>
+                    <option value="respiratory">تنفسي</option>
+                    <option value="cardiac">قلبي</option>
+                    <option value="neurological">عصبي</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="paers_experience">خبرة في طب الأطفال (سنوات) *</label>
+                <input type="number" id="paers_experience" name="pediatric_experience" min="0" required>
+            </div>
+        `
+    }
+};
+
+// دالة لعرض النموذج المحدد
+function showCertificateForm(certType) {
+    const container = document.getElementById('certificateFormContainer');
+    
+    if (certType && certificateForms[certType]) {
+        const formData = certificateForms[certType];
+        container.innerHTML = `
+            <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-top: 20px; border-right: 4px solid #2575fc;">
+                <h3 style="color: #2575fc; margin-bottom: 15px;">${formData.title}</h3>
+                ${formData.fields}
+            </div>
+        `;
+    } else {
+        container.innerHTML = '';
+    }
+        }
+
+
+        
 
         // تغيير الخدمة عند النقر على الزر
         document.querySelectorAll('.service-btn').forEach(btn => {
@@ -539,7 +800,7 @@
             loading.style.display = 'block';
             
             // إرسال البيانات باستخدام Fetch API
-            fetch('https://formspree.io/f/xzzjwggd', {
+            fetch('https://formspree.io/f/xzzjwgg', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json'
@@ -570,6 +831,7 @@
     </script>
 </body>
 </html>
+
 
 
 
