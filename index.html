@@ -266,6 +266,14 @@
         🎓 الشهادات المهنية
     </button>
 </li>
+
+<li class="service-item">
+    <button class="service-btn" data-service="cme">
+        📚 طلب إضافة ساعات تعليم مستمر
+    </button>
+</li>
+
+                
             </ul>
         </aside>
         
@@ -523,7 +531,92 @@ certificates: {
         <!-- سيتم عرض النموذج المحدد هنا -->
         <div id="certificateFormContainer"></div>
     `
-        }
+        },
+
+
+cme: {
+    title: "طلب إضافة ساعات تعليم مستمر",
+    description: "أدخل بيانات الساعات التعليمية للموافقة عليها",
+    fields: `
+        <!-- الجهة -->
+        <div class="form-group">
+            <label for="cme_institution">الجهة المانحة *</label>
+            <input type="text" id="cme_institution" name="institution" required 
+                   placeholder="اسم الجهة المنظمة للبرنامج">
+        </div>
+        
+        <!-- اسم البرنامج -->
+        <div class="form-group">
+            <label for="cme_program">اسم البرنامج *</label>
+            <input type="text" id="cme_program" name="program_name" required 
+                   placeholder="اسم البرنامج التعليمي">
+        </div>
+        
+        <!-- التاريخ -->
+        <div class="form-group">
+            <label for="cme_date">تاريخ البرنامج *</label>
+            <input type="date" id="cme_date" name="program_date" required>
+        </div>
+        
+        <!-- عدد الساعات -->
+        <div class="form-group">
+            <label for="cme_hours">عدد الساعات التعليمية *</label>
+            <input type="number" id="cme_hours" name="education_hours" 
+                   min="1" max="100" required 
+                   placeholder="عدد الساعات المعتمدة">
+        </div>
+        
+        <!-- رقم الاعتماد -->
+        <div class="form-group">
+            <label for="cme_accreditation">رقم الاعتماد *</label>
+            <input type="text" id="cme_accreditation" name="accreditation_number" required 
+                   placeholder="رقم الاعتماد الرسمي">
+        </div>
+        
+        <!-- رفع الشهادة -->
+        <div class="form-group">
+            <label for="cme_certificate">ارفاق الشهادة *</label>
+            <input type="file" id="cme_certificate" name="certificate_file" 
+                   accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" required>
+            <small style="color: #666; display: block; margin-top: 5px;">
+                المسموح: PDF, JPG, PNG, DOC (الحجم الأقصى: 10MB)
+            </small>
+        </div>
+        
+        <!-- معلومات إضافية -->
+        <div class="form-group">
+            <label for="cme_notes">ملاحظات إضافية</label>
+            <textarea id="cme_notes" name="additional_notes" 
+                     placeholder="أي معلومات إضافية تريد إضافتها..."></textarea>
+        </div>
+        
+        <!-- معلومات المقدم -->
+        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 20px 0;">
+            <h4 style="color: #2575fc; margin-bottom: 15px;">معلومات المقدم</h4>
+            
+            <div class="form-group">
+                <label for="cme_name">الاسم الكامل *</label>
+                <input type="text" id="cme_name" name="full_name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="cme_id">رقم الهوية *</label>
+                <input type="text" id="cme_id" name="national_id" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="cme_phone">رقم الجوال *</label>
+                <input type="tel" id="cme_phone" name="phone" required placeholder="5XXXXXXX">
+            </div>
+            
+            <div class="form-group">
+                <label for="cme_email">البريد الإلكتروني *</label>
+                <input type="email" id="cme_email" name="email" required>
+            </div>
+        </div>
+    `
+}
+            
 
             
         };
@@ -811,6 +904,7 @@ function showCertificateForm(certType) {
     </script>
 </body>
 </html>
+
 
 
 
