@@ -479,28 +479,6 @@
         </div>
         
         <!-- JavaScript لحساب عدد الأيام تلقائياً -->
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const startDate = document.getElementById('new_vacation_start');
-                const endDate = document.getElementById('new_vacation_end');
-                const daysCount = document.getElementById('new_days_count');
-                
-                function calculateDays() {
-                    if (startDate.value && endDate.value) {
-                        const start = new Date(startDate.value);
-                        const end = new Date(endDate.value);
-                        const diffTime = Math.abs(end - start);
-                        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
-                        daysCount.value = diffDays;
-                    }
-                }
-                
-                startDate.addEventListener('change', calculateDays);
-                endDate.addEventListener('change', calculateDays);
-            });
-        </script>
-    `
-    }
         
 
 
@@ -609,6 +587,7 @@
     </script>
 </body>
 </html>
+
 
 
 
