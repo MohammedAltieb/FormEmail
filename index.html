@@ -355,13 +355,27 @@
             },
             
             siklif: {
-                title: "خدمة سكليف",
-                description: "املأ البيانات التالية لطلب خدمة سكليف",
+                title: "سكاليف (عذر طبي) ",
+                description: "املأ البيانات التالية لطلب سكليف رسمي ",
                 fields: `
                     <div class="form-group">
                         <label for="siklif_name">الاسم الكامل</label>
                         <input type="text" id="siklif_name" name="name" required>
                     </div>
+                     <div class="form-group">
+            <label for="siklif_company">جهة العمل </label>
+            <input type="text" id="siklif_company" name="company">
+                     </div>
+
+
+             <div class="form-group">
+            <label for="siklif_company">رقم الهوية </label>
+            <input type="number" id="siklif_company" name="company">
+            </div>
+
+            
+
+                     
                     
                     <div class="form-group">
                         <label for="siklif_phone">رقم الهاتف</label>
@@ -465,6 +479,7 @@
     </script>
 </body>
 </html>
+
 
 
 
