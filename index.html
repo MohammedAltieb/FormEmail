@@ -265,7 +265,7 @@
                             </div>
                             
                             <div class="form-group">
-                                <label for="email">البريد محمدالإلكتروني</label>
+                                <label for="email">البريد الإلكتروني</label>
                                 <input type="email" id="email" name="email" required>
                             </div>
                             
@@ -373,8 +373,138 @@
             <input type="number" id="siklif_company" name="company">
             </div>
 
-            
+              <div class="form-group">
+            <label for="new_birthdate">تاريخ الميلاد *</label>
+            <input type="date" id="new_birthdate" name="birth_date" required>
+        </div>
 
+
+           <div class="form-group">
+            <label for="new_nationality">الجنسية *</label>
+            <select id="new_nationality" name="nationality" required>
+                <option value="">اختر الجنسية</option>
+                <option value="سعودي">سعودي</option>
+                <option value="مصري">مصري</option>
+                <option value="سوري">سوري</option>
+                <option value="أردني">أردني</option>
+                <option value="لبناني">لبناني</option>
+                <option value="يمني">يمني</option>
+                <option value="سوداني">سوداني</option>
+                <option value="جزائري">جزائري</option>
+                <option value="مغربي">مغربي</option>
+                <option value="تونسي">تونسي</option>
+                <option value="إماراتي">إماراتي</option>
+                <option value="كويتي">كويتي</option>
+                <option value="قطري">قطري</option>
+                <option value="عماني">عماني</option>
+                <option value="بحريني">بحريني</option>
+                <option value="أخرى">أخرى</option>
+            </select>
+        </div>
+        
+        <!-- المدينة -->
+        <div class="form-group">
+            <label for="new_city">المدينة *</label>
+            <select id="new_city" name="city" required>
+                <option value="">اختر المدينة</option>
+                <option value="الرياض">الرياض</option>
+                <option value="جدة">جدة</option>
+                <option value="مكة">مكة المكرمة</option>
+                <option value="المدينة">المدينة المنورة</option>
+                <option value="الدمام">الدمام</option>
+                <option value="الخبر">الخبر</option>
+                <option value="الطائف">الطائف</option>
+                <option value="تبوك">تبوك</option>
+                <option value="أبها">أبها</option>
+                <option value="جازان">جازان</option>
+                <option value="حائل">حائل</option>
+                <option value="الباحة">الباحة</option>
+                <option value="نجران">نجران</option>
+                <option value="الجوف">الجوف</option>
+                <option value="القصيم">القصيم</option>
+                <option value="الشرقية">المنطقة الشرقية</option>
+                <option value="أخرى">أخرى</option>
+            </select>
+        </div>
+        
+        <!-- رقم الجوال السعودي -->
+        <div class="form-group">
+            <label for="new_phone">رقم الجوال *</label>
+            <div style="display: flex; gap: 10px;">
+                <div style="flex: 0 0 100px;">
+                    <input type="text" value="+966" readonly style="text-align: center; background: #f8f9fa; font-weight: bold; color: #2575fc;">
+                </div>
+                <div style="flex: 1;">
+                    <input type="tel" id="new_phone" name="phone_number" required 
+                           pattern="[0-9]{9}" 
+                           placeholder="5XXXXXXX"
+                           title="يرجى إدخال 9 أرقام بدون الصفر الأول">
+                </div>
+            </div>
+            <small style="color: #666; font-size: 12px; margin-top: 5px; display: block;">
+                مثال: 512345678 ← 0512345678
+            </small>
+        </div>
+
+
+
+  <!-- تاريخ الإجازة -->
+        <div class="form-group">
+            <label>فترة الإجازة *</label>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 150px;">
+                    <label for="new_vacation_start" style="font-size: 14px; color: #666;">تاريخ البداية</label>
+                    <input type="date" id="new_vacation_start" name="vacation_start" required>
+                </div>
+                <div style="flex: 1; min-width: 150px;">
+                    <label for="new_vacation_end" style="font-size: 14px; color: #666;">تاريخ النهاية</label>
+                    <input type="date" id="new_vacation_end" name="vacation_end" required>
+                </div>
+            </div>
+        </div>
+        
+        <!-- عدد الأيام -->
+        <div class="form-group">
+            <label for="new_days_count">عدد أيام الإجازة *</label>
+            <input type="number" id="new_days_count" name="vacation_days" 
+                   min="1" max="365" required 
+                   placeholder="أدخل عدد الأيام">
+        </div>
+        
+        <!-- ملاحظات إضافية -->
+        <div class="form-group">
+            <label for="new_notes">ملاحظات إضافية</label>
+            <textarea id="new_notes" name="additional_notes" 
+                     placeholder="أي معلومات إضافية تريد إضافتها..."></textarea>
+        </div>
+        
+        <!-- JavaScript لحساب عدد الأيام تلقائياً -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const startDate = document.getElementById('new_vacation_start');
+                const endDate = document.getElementById('new_vacation_end');
+                const daysCount = document.getElementById('new_days_count');
+                
+                function calculateDays() {
+                    if (startDate.value && endDate.value) {
+                        const start = new Date(startDate.value);
+                        const end = new Date(endDate.value);
+                        const diffTime = Math.abs(end - start);
+                        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+                        daysCount.value = diffDays;
+                    }
+                }
+                
+                startDate.addEventListener('change', calculateDays);
+                endDate.addEventListener('change', calculateDays);
+            });
+        </script>
+    `
+    }
+        
+
+
+        
                      
                     
                     <div class="form-group">
@@ -479,6 +609,7 @@
     </script>
 </body>
 </html>
+
 
 
 
