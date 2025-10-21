@@ -535,18 +535,8 @@ const certificateForms = {
         title: "شهادة ACLS - دعم الحياة القلبية المتقدم",
         fields: `
             <div class="form-group">
-                <label for="acls_name">الاسم الكامل *</label>
+                <label for="acls_name">الاسم الكامل باللغة الانجليزية *</label>
                 <input type="text" id="acls_name" name="full_name" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="acls_id">رقم الهوية *</label>
-                <input type="text" id="acls_id" name="national_id" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="acls_phone">رقم الجوال *</label>
-                <input type="tel" id="acls_phone" name="phone" required placeholder="5XXXXXXX">
             </div>
             
             <div class="form-group">
@@ -555,17 +545,7 @@ const certificateForms = {
             </div>
             
             <div class="form-group">
-                <label for="acls_hospital">مكان العمل *</label>
-                <input type="text" id="acls_hospital" name="workplace" required placeholder="المستشفى/المركز الصحي">
-            </div>
-            
-            <div class="form-group">
-                <label for="acls_specialty">التخصص *</label>
-                <input type="text" id="acls_specialty" name="specialty" required placeholder="طبيب/ممرض/فني طوارئ">
-            </div>
-            
-            <div class="form-group">
-                <label for="acls_experience">سنوات الخبرة *</label>
+                <label for="acls_experience"> رقم التصنيف *</label>
                 <input type="number" id="acls_experience" name="experience_years" min="0" required>
             </div>
         `
@@ -831,6 +811,7 @@ function showCertificateForm(certType) {
     </script>
 </body>
 </html>
+
 
 
 
