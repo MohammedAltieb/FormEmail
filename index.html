@@ -821,7 +821,6 @@ function showCertificateForm(certType) {
     }
         }
 
-
         
 
         // تغيير الخدمة عند النقر على الزر
@@ -856,7 +855,7 @@ function showCertificateForm(certType) {
         
         // ✅ تحديث اسم النموذج ديناميكياً
         const form = document.getElementById('dynamicForm');
-    form.setAttribute('name', service);
+    form.setAttribute('name', formData.name);
         
         // ✅ تأكد من وجود الحقل المخفي form-name
         let formNameInput = document.querySelector('input[name="form-name"]');
@@ -927,6 +926,7 @@ function showCertificateForm(certType) {
     </script>
 </body>
 </html>
+
 
 
 
