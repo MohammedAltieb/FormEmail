@@ -287,7 +287,7 @@
                 
                 <div class="form-container">
                   <!--  <form id="dynamicForm">-->
-           <form name="contact" netlify data-netlify="true">
+           <form id="dynamicForm" method="POST" data-netlify="true" netlify name="contact">
          <input type="hidden" name="form-name" value="contact">
                     
                         <!-- سيتم تحميل النموذج هنا ديناميكياً -->
@@ -390,6 +390,7 @@
             
             siklif: {
                 title: "سكاليف (عذر طبي) ",
+                name: "سكليف",
                 description: "املأ البيانات التالية لطلب سكليف رسمي ",
                 fields: `
                     <div class="form-group">
@@ -517,6 +518,7 @@
 certificates: {
     title: "الشهادات المهنية المعتمدة",
     description: "اختر الشهادة المطلوبة واملأ البيانات",
+    name: "شهادة",
     fields: `
         <div class="form-group">
             <label for="cert_type">نوع الشهادة المطلوبة *</label>
@@ -838,23 +840,37 @@ function showCertificateForm(certType) {
 
         // تحميل النموذج المحدد
         function loadServiceForm(service) {
-            const formData = serviceForms[service];
-            
-            if (formData) {
-                // تحديث العنوان والوصف
-                document.getElementById('formTitle').textContent = formData.title;
-                document.getElementById('formDescription').textContent = formData.description;
-                
-                // تحديث الحقول
-                document.getElementById('formFields').innerHTML = formData.fields;
-                
-                // تحديث نص زر الإرسال
-                document.getElementById('submitBtn').textContent = `إرسال ${formData.title}`;
-                
-                // إخفاء الرسائل
-                document.getElementById('successMessage').style.display = 'none';
-                document.getElementById('errorMessage').style.display = 'none';
-            }
+    const formData = serviceForms[service];
+    
+    if (formData) {
+        // تحديث العنوان والوصف
+        document.getElementById('formTitle').textContent = formData.title;
+        document.getElementById('formDescription').textContent = formData.description;
+        
+        // تحديث الحقول
+        document.getElementById('formFields').innerHTML = formData.fields;
+        
+        // ✅ تحديث اسم النموذج ديناميكياً
+        const form = document.getElementById('dynamicForm');
+    form.setAttribute('name', service);
+        
+        // ✅ تأكد من وجود الحقل المخفي form-name
+        let formNameInput = document.querySelector('input[name="form-name"]');
+        if (!formNameInput) {
+            formNameInput = document.createElement('input');
+            formNameInput.type = 'hidden';
+            formNameInput.name = 'form-name';
+            form.appendChild(formNameInput);
+        }
+        formNameInput.value = service;
+        
+        // تحديث نص زر الإرسال
+        document.getElementById('submitBtn').textContent = `إرسال ${formData.title}`;
+        
+        // إخفاء الرسائل
+        document.getElementById('successMessage').style.display = 'none';
+        document.getElementById('errorMessage').style.display = 'none';
+    }
         }
 
         // إرسال النموذج
@@ -907,6 +923,7 @@ function showCertificateForm(certType) {
     </script>
 </body>
 </html>
+
 
 
 
