@@ -851,90 +851,63 @@ function showCertificateForm(certType) {
         });
 
         // تحميل النموذج المحدد
-        function loadServiceForm(service) {
+        
+        // إرسال النموذج
+      document.getElementById('dynamicForm').addEventListener('submit', function(e) {
+          e.preventDe// 1. دالة تحميل النموذج (منفصلة)
+function loadServiceForm(service) {
+function loadServiceForm(service) {
     const formData = serviceForms[service];
     
     if (formData) {
-        // تحديث العنوان والوصف
         document.getElementById('formTitle').textContent = formData.title;
         document.getElementById('formDescription').textContent = formData.description;
-        
-        // تحديث الحقول
         document.getElementById('formFields').innerHTML = formData.fields;
-        
-        // ✅ تحديث اسم النموذج ديناميكياً
-        const form = document.getElementById('dynamicForm');
-    form.setAttribute('name', formData.name);
-        
-        // ✅ تأكد من وجود الحقل المخفي form-name
-        let formNameInput = document.querySelector('input[name="form-name"]');
-        if (!formNameInput) {
-            formNameInput = document.createElement('input');
-            formNameInput.type = 'hidden';
-            formNameInput.name = 'form-name';
-            form.appendChild(formNameInput);
-        }
-        formNameInput.value = service;
-        
-        // تحديث نص زر الإرسال
+        document.getElementById('dynamicForm').action = `https://formsubmit.co/ajax/zzz774699858@gmail.com`;
         document.getElementById('submitBtn').textContent = `إرسال ${formData.title}`;
-        
-        // إخفاء الرسائل
         document.getElementById('successMessage').style.display = 'none';
         document.getElementById('errorMessage').style.display = 'none';
     }
+}
+
+// حدث الإرسال
+document.getElementById('dynamicForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const submitBtn = document.getElementById('submitBtn');
+    const loading = document.getElementById('loading');
+    const successMessage = document.getElementById('successMessage');
+    const errorMessage = document.getElementById('errorMessage');
+    const form = this;
+    
+    successMessage.style.display = 'none';
+    errorMessage.style.display = 'none';
+    
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'جاري الإرسال...';
+    loading.style.display = 'block';
+    
+    fetch('https://formsubmit.co/ajax/zzz774699858@gmail.com', {
+        method: 'POST',
+        body: new FormData(form)
+    })
+    .then(response => {
+        if (response.ok) {
+            successMessage.style.display = 'block';
+            form.reset();
+        } else {
+            throw new Error('فشل الإرسال');
         }
-
-        // إرسال النموذج
-      document.getElementById('dynamicForm').addEventListener('submit', function(e) {
-          e.preventDefault();
-            
-            const submitBtn = document.getElementById('submitBtn');
-            const loading = document.getElementById('loading');
-            const successMessage = document.getElementById('successMessage');
-            const errorMessage = document.getElementById('errorMessage');
-            
-            // إخفاء جميع الرسائل
-            successMessage.style.display = 'none';
-            errorMessage.style.display = 'none';
-            
-            // إظهار حالة التحميل
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'جاري الإرسال...';
-            loading.style.display = 'block';
-            
-            // إرسال البيانات باستخدام Fetch API
-            
-            .then(response => {
-                if (response.ok) {
-                    // النجاح
-                    successMessage.style.display = 'block';
-                    document.getElementById('dynamicForm').reset();
-                } else {
-                    // الخطأ
-                    throw new Error('فشل الإرسال');
-                }
-            })
-            .catch(error => {
-                // خطأ في الشبكة أو الإرسال
-                errorMessage.style.display = 'block';
-            })
-            .finally(() => {
-                // إعادة تعيين الزر وإخفاء التحميل
-                submit           // إرسال البيانات باستخدام Fetch API
-            Fetch API
-              fetch('https://formsubmit.co/ajax/zzz774699858@gmail.com', {
-    method: 'POST',
-    body: new FormData(form)
-})  
-          //  fetch('https://formsubmit.co/ajax/zzz774699858@gmail.com', {
-  //  method: 'POST',
- //   body: new FormData(form)
-
-
-                
-                body: new FormData(this)
-            })
+    })
+    .catch(error => {
+        errorMessage.style.display = 'block';
+    })
+    .finally(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = `إرسال ${document.getElementById('formTitle').textContent}`;
+        loading.style.display = 'none';
+    });
+});
             .then(response => {
                 if (respons= `إرسال ${document.getElementById('formTitle').textContent}`;
                 loading.style.display = 'none';
@@ -943,6 +916,7 @@ function showCertificateForm(certType) {
     </script>
 </body>
 </html>
+
 
 
 
