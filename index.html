@@ -289,8 +289,7 @@
                 
                     
                 
-               <form id="dynamicForm" action="https://formspree.io/f/YOUR_FORM_ID_HERE" method="POST">
-                  
+               <form id="dynamicForm" method="POST">
     
          <input type="hidden" name="form-name" value="contact">
                     
@@ -895,14 +894,7 @@ function showCertificateForm(certType) {
             loading.style.display = 'block';
             
             // إرسال البيانات باستخدام Fetch API
-            Fetch API
-            fetch(this.action, {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json'
-                },
-                body: new FormData(this)
-            })
+            
             .then(response => {
                 if (response.ok) {
                     // النجاح
@@ -919,14 +911,26 @@ function showCertificateForm(certType) {
             })
             .finally(() => {
                 // إعادة تعيين الزر وإخفاء التحميل
-                submitBtn.disabled = false;
-                submitBtn.textContent = `إرسال ${document.getElementById('formTitle').textContent}`;
+                submit           // إرسال البيانات باستخدام Fetch API
+            Fetch API
+                
+            fetch('https://formsubmit.co/ajax/zzz774699858@gmail.com', {
+    method: 'POST',
+    body: new FormData(form)
+})
+
+                
+                body: new FormData(this)
+            })
+            .then(response => {
+                if (respons= `إرسال ${document.getElementById('formTitle').textContent}`;
                 loading.style.display = 'none';
             });
         });   
     </script>
 </body>
 </html>
+
 
 
 
