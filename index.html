@@ -346,139 +346,7 @@
         </main>
     </div>
 
-    <script>
-        // تعريف النماذج المختلفة
-        const serviceForms = {
-            contact: {
-                title: "نموذج إرسال البيانات",
-                description: "املأ النموذج أدناه وسيتم إرسال البيانات إلى بريدي الإلكتروني",
-                fields: `
-                    <div class="form-group">
-                        <label for="name">الاسم الكامل</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="email">البريد الإلكتروني</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="phone">رقم الهاتف</label>
-                        <input type="tel" id="phone" name="phone">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="subject">الموضوع</label>
-                        <select id="subject" name="subject" required>
-                            <option value="">اختر موضوع الرسالة</option>
-                            <option value="استفسار">استفسار</option>
-                            <option value="اقتراح">اقتراح</option>
-                            <option value="شكوى">شكوى</option>
-                            <option value="طلب">طلب</option>
-                            <option value="أخرى">أخرى</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="message">الرسالة</label>
-                        <textarea id="message" name="message" required></textarea>
-                    </div>
-                `
-            },
-            
-            siklif: {
-                title: "سكاليف (عذر طبي) ",
-                name: "سكليف",
-                description: "املأ البيانات التالية لطلب سكليف رسمي ",
-                fields: `
-                    <div class="form-group">
-                        <label for="siklif_name">الاسم الكامل</label>
-                        <input type="text" id="siklif_name" name="name" required>
-                    </div>
-                     <div class="form-group">
-            <label for="siklif_company">جهة العمل </label>
-            <input type="text" id="siklif_company" name="company">
-                     </div>
-
-
-             <div class="form-group">
-            <label for="siklif_company">رقم الهوية </label>
-            <input type="number" id="siklif_company" name="company">
-            </div>
-
-              <div class="form-group">
-            <label for="new_birthdate">تاريخ الميلاد *</label>
-            <input type="date" id="new_birthdate" name="birth_date" required>
-        </div>
-
-
-           <div class="form-group">
-            <label for="new_nationality">الجنسية *</label>
-            <select id="new_nationality" name="nationality" required>
-                <option value="">اختر الجنسية</option>
-                <option value="سعودي">سعودي</option>
-                <option value="مصري">مصري</option>
-                <option value="سوري">سوري</option>
-                <option value="أردني">أردني</option>
-                <option value="لبناني">لبناني</option>
-                <option value="يمني">يمني</option>
-                <option value="سوداني">سوداني</option>
-                <option value="جزائري">جزائري</option>
-                <option value="مغربي">مغربي</option>
-                <option value="تونسي">تونسي</option>
-                <option value="إماراتي">إماراتي</option>
-                <option value="كويتي">كويتي</option>
-                <option value="قطري">قطري</option>
-                <option value="عماني">عماني</option>
-                <option value="بحريني">بحريني</option>
-                <option value="أخرى">أخرى</option>
-            </select>
-        </div>
-        
-        <!-- المدينة -->
-        <div class="form-group">
-            <label for="new_city">المدينة *</label>
-            <select id="new_city" name="city" required>
-                <option value="">اختر المدينة</option>
-                <option value="الرياض">الرياض</option>
-                <option value="جدة">جدة</option>
-                <option value="مكة">مكة المكرمة</option>
-                <option value="المدينة">المدينة المنورة</option>
-                <option value="الدمام">الدمام</option>
-                <option value="الخبر">الخبر</option>
-                <option value="الطائف">الطائف</option>
-                <option value="تبوك">تبوك</option>
-                <option value="أبها">أبها</option>
-                <option value="جازان">جازان</option>
-                <option value="حائل">حائل</option>
-                <option value="الباحة">الباحة</option>
-                <option value="نجران">نجران</option>
-                <option value="الجوف">الجوف</option>
-                <option value="القصيم">القصيم</option>
-                <option value="الشرقية">المنطقة الشرقية</option>
-                <option value="أخرى">أخرى</option>
-            </select>
-        </div>
-        
-        <!-- رقم الجوال السعودي -->
-        <div class="form-group">
-            <label for="new_phone">رقم الجوال *</label>
-            <div style="display: flex; gap: 10px;">
-                <div style="flex: 0 0 100px;">
-                    <input type="text" value="+966" readonly style="text-align: center; background: #f8f9fa; font-weight: bold; color: #2575fc;">
-                </div>
-                <div style="flex: 1;">
-                    <input type="tel" id="new_phone" name="phone_number" required 
-                           pattern="[0-9]{9}" 
-                           placeholder="5XXXXXXX"
-                           title="يرجى إدخال 9 أرقام بدون الصفر الأول">
-                </div>
-            </div>
-            <small style="color: #666; font-size: 12px; margin-top: 5px; display: block;">
-                مثال: 512345678 ← 0512345678
-            </small>
-        </div>
+    
 
  <script>
         // تعريف النماذج المختلفة
@@ -1144,6 +1012,7 @@ cme: {
     </script>
 </body>
 </html>
+
 
 
 
