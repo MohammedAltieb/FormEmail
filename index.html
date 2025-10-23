@@ -288,7 +288,7 @@
                 <div class="form-container">
                 
                     
-                <form action="https://formsubmit.co/ajax/zzz774699858@gmail.com" method="POST">
+                <form action="" method="POST">
     <!-- أضف هنا -->
     <input type="hidden" name="_subject" value="نموذج جديد من الموقع">
     <input type="hidden" name="_captcha" value="false">
@@ -923,11 +923,14 @@ function showCertificateForm(certType) {
                 // إعادة تعيين الزر وإخفاء التحميل
                 submit           // إرسال البيانات باستخدام Fetch API
             Fetch API
-                
+              fetch('https://formsubmit.co/ajax/zzz774699858@gmail.com', {
+    method: 'POST',
+    body: new FormData(form)
+})  
           //  fetch('https://formsubmit.co/ajax/zzz774699858@gmail.com', {
   //  method: 'POST',
  //   body: new FormData(form)
-})
+
 
                 
                 body: new FormData(this)
@@ -940,6 +943,7 @@ function showCertificateForm(certType) {
     </script>
 </body>
 </html>
+
 
 
 
