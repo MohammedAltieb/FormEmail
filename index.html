@@ -289,7 +289,7 @@
                 
                     
                 
-              <form id="dynamicForm">
+               <form id="dynamicForm" action="https://formspree.io/f/YOUR_FORM_ID_HERE" method="POST">
                   
     
          <input type="hidden" name="form-name" value="contact">
@@ -895,7 +895,8 @@ function showCertificateForm(certType) {
             loading.style.display = 'block';
             
             // إرسال البيانات باستخدام Fetch API
-            fetch('https://formspree.io/f/xzzjwggd', {
+            Fetch API
+            fetch(this.action, {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json'
@@ -926,6 +927,7 @@ function showCertificateForm(certType) {
     </script>
 </body>
 </html>
+
 
 
 
