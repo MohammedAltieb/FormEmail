@@ -789,53 +789,58 @@ certificates: {
         });
 
         // إرسال النموذج باستخدام Formspree
-        document.getElementById('dynamicForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const submitBtn = document.getElementById('submitBtn');
-            const loading = document.getElementById('loading');
-            const successMessage = document.getElementById('successMessage');
-            const errorMessage = document.getElementById('errorMessage');
-            
-            // إخفاء جميع الرسائل
-            successMessage.style.display = 'none';
-            errorMessage.style.display = 'none';
-            
-            // إظهار حالة التحميل
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'جاري الإرسال...';
-            loading.style.display = 'block';
-            
-            // إرسال البيانات باستخدام Fetch API
-            fetch(this.action, {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json'
-                },
-                body: new FormData(this)
-            })
-            .then(response => {
-                if (response.ok) {
-                    // النجاح
-                    successMessage.style.display = 'block';
-                    document.getElementById('dynamicForm').reset();
-                } else {
-                    // الخطأ
-                    throw new Error('فشل الإرسال');
-                }
-            })
-            .catch(error => {
-                // خطأ في الشبكة أو الإرسال
-                errorMessage.style.display = 'block';
-            })
-            .finally(() => {
-                // إعادة تعيين الزر وإخفاء التحميل
-                submitBtn.disabled = false;
-                submitBtn.textContent = `إرسال ${document.getElementById('formTitle').textContent}`;
-                loading.style.display = 'none';
-            });
-        });
-
+        // إرسال النموذج باستخدام Formspree
+document.getElementById('dynamicForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const submitBtn = document.getElementById('submitBtn');
+    const loading = document.getElementById('loading');
+    const successMessage = document.getElementById('successMessage');
+    const errorMessage = document.getElementById('errorMessage');
+    
+    // إخفاء جميع الرسائل
+    successMessage.style.display = 'none';
+    errorMessage.style.display = 'none';
+    
+    // إظهار حالة التحميل
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'جاري الإرسال...';
+    loading.style.display = 'block';
+    
+    // جمع البيانات من النموذج
+    const formData = new FormData(this);
+    
+    // إرسال البيانات باستخدام Fetch API
+    fetch(this.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => {
+        console.log('Response status:', response.status);
+        if (response.ok) {
+            return response.json();
+        } else {
+            throw new Error('فشل الإرسال: ' + response.status);
+        }
+    })
+    .then(data => {
+        console.log('Success:', data);
+        successMessage.style.display = 'block';
+        document.getElementById('dynamicForm').reset();
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        errorMessage.style.display = 'block';
+    })
+    .finally(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = `إرسال ${document.getElementById('formTitle').textContent}`;
+        loading.style.display = 'none';
+    });
+});
         // تحميل النموذج الأساسي عند بدء التشغيل
         document.addEventListener('DOMContentLoaded', function() {
             loadServiceForm('contact');
@@ -843,6 +848,7 @@ certificates: {
     </script>
 </body>
 </html>
+
 
 
 
