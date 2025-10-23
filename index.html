@@ -258,8 +258,7 @@
                 <li class="service-item">
                     <button class="service-btn" data-service="siklif">
                         🏥 طلب سكليف
-                    </button>
-                </li>
+                              </li>
                 
 <li class="service-item">
     <button class="service-btn" data-service="certificates">
@@ -276,10 +275,7 @@
                 
             </ul>
         </aside>
-        
-        <!-- المحتوى الرئيسي -->
-        <main class="main-content">
-           <main class="main-content">
+              <main class="main-content">
             <div class="container">
                 <header>
                     <h1 id="formTitle">نموذج إرسال البيانات</h1>
@@ -287,42 +283,9 @@
                 </header>
                 
                 <div class="form-container">
-                    <!-- استبدلت Formspree ID هنا - ضع ID الخاص بك -->
-                    <form id="dynamicForm" action="https://formspree.io/f/YOUR_FORM_ID_HERE" method="POST">
-                        <!-- سيتم تحميل النموذج هنا ديناميكياً -->
-                        <div id="formFields"> 
-                            <!-- النموذج الأساسي -->
-                            <div class="form-group">
-                                <label for="name">الاسم الكامل</label>
-                                <input type="text" id="name" name="name" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="email">البريد الإلكتروني</label>
-                                <input type="email" id="email" name="email" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="phone">رقم الهاتف</label>
-                                <input type="tel" id="phone" name="phone">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="subject">الموضوع</label>
-                                <select id="subject" name="subject" required>
-                                    <option value="">اختر موضوع الرسالة</option>
-                                    <option value="استفسار">استفسار</option>
-                                    <option value="اقتراح">اقتراح</option>
-                                    <option value="شكوى">شكوى</option>
-                                    <option value="طلب">طلب</option>
-                                    <option value="أخرى">أخرى</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="message">الرسالة</label>
-                                <textarea id="message" name="message" required></textarea>
-                            </div>
+                    <form id="dynamicForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                        <div id="formFields">
+                            <!-- المحتوى الأساسي سيتم تحميله هنا -->
                         </div>
                         
                         <button type="submit" id="submitBtn">
@@ -346,9 +309,7 @@
         </main>
     </div>
 
-    
-
- <script>
+    <script>
         // تعريف النماذج المختلفة
         const serviceForms = {
             contact: {
@@ -390,117 +351,114 @@
             },
             
             siklif: {
-                title: "سكاليف (عذر طبي) ",
-                description: "املأ البيانات التالية لطلب سكليف رسمي ",
+                title: "سكاليف (عذر طبي)",
+                description: "املأ البيانات التالية لطلب سكليف رسمي",
                 fields: `
                     <div class="form-group">
                         <label for="siklif_name">الاسم الكامل</label>
                         <input type="text" id="siklif_name" name="name" required>
                     </div>
-                     <div class="form-group">
-            <label for="siklif_company">جهة العمل </label>
-            <input type="text" id="siklif_company" name="company">
-                     </div>
+                    
+                    <div class="form-group">
+                        <label for="siklif_company">جهة العمل</label>
+                        <input type="text" id="siklif_company" name="company">
+                    </div>
 
-             <div class="form-group">
-            <label for="siklif_id">رقم الهوية </label>
-            <input type="number" id="siklif_id" name="id_number">
-            </div>
+                    <div class="form-group">
+                        <label for="siklif_id">رقم الهوية</label>
+                        <input type="number" id="siklif_id" name="id_number">
+                    </div>
 
-              <div class="form-group">
-            <label for="new_birthdate">تاريخ الميلاد *</label>
-            <input type="date" id="new_birthdate" name="birth_date" required>
-        </div>
+                    <div class="form-group">
+                        <label for="siklif_birthdate">تاريخ الميلاد *</label>
+                        <input type="date" id="siklif_birthdate" name="birth_date" required>
+                    </div>
 
-           <div class="form-group">
-            <label for="new_nationality">الجنسية *</label>
-            <select id="new_nationality" name="nationality" required>
-                <option value="">اختر الجنسية</option>
-                <option value="سعودي">سعودي</option>
-                <option value="مصري">مصري</option>
-                <option value="سوري">سوري</option>
-                <option value="أردني">أردني</option>
-                <option value="لبناني">لبناني</option>
-                <option value="يمني">يمني</option>
-                <option value="سوداني">سوداني</option>
-                <option value="جزائري">جزائري</option>
-                <option value="مغربي">مغربي</option>
-                <option value="تونسي">تونسي</option>
-                <option value="إماراتي">إماراتي</option>
-                <option value="كويتي">كويتي</option>
-                <option value="قطري">قطري</option>
-                <option value="عماني">عماني</option>
-                <option value="بحريني">بحريني</option>
-                <option value="أخرى">أخرى</option>
-            </select>
-        </div>
-        
-        <!-- المدينة -->
-        <div class="form-group">
-            <label for="new_city">المدينة *</label>
-            <select id="new_city" name="city" required>
-                <option value="">اختر المدينة</option>
-                <option value="الرياض">الرياض</option>
-                <option value="جدة">جدة</option>
-                <option value="مكة">مكة المكرمة</option>
-                <option value="المدينة">المدينة المنورة</option>
-                <option value="الدمام">الدمام</option>
-                <option value="الخبر">الخبر</option>
-                <option value="الطائف">الطائف</option>
-                <option value="تبوك">تبوك</option>
-                <option value="أبها">أبها</option>
-                <option value="جازان">جازان</option>
-                <option value="حائل">حائل</option>
-                <option value="الباحة">الباحة</option>
-                <option value="نجران">نجران</option>
-                <option value="الجوف">الجوف</option>
-                <option value="القصيم">القصيم</option>
-                <option value="الشرقية">المنطقة الشرقية</option>
-                <option value="أخرى">أخرى</option>
-            </select>
-        </div>
-        
-        <!-- رقم الجوال السعودي -->
-        <div class="form-group">
-            <label for="new_phone">رقم الجوال *</label>
-            <div style="display: flex; gap: 10px;">
-                <div style="flex: 0 0 100px;">
-                    <input type="text" value="+966" readonly style="text-align: center; background: #f8f9fa; font-weight: bold; color: #2575fc;">
-                </div>
-                <div style="flex: 1;">
-                    <input type="tel" id="new_phone" name="phone_number" required 
-                           pattern="[0-9]{9}" 
-                           placeholder="5XXXXXXX"
-                           title="يرجى إدخال 9 أرقام بدون الصفر الأول">
-                </div>
-            </div>
-            <small style="color: #666; font-size: 12px; margin-top: 5px; display: block;">
-                مثال: 512345678 ← 0512345678
-            </small>
-        </div>
+                    <div class="form-group">
+                        <label for="siklif_nationality">الجنسية *</label>
+                        <select id="siklif_nationality" name="nationality" required>
+                            <option value="">اختر الجنسية</option>
+                            <option value="سعودي">سعودي</option>
+                            <option value="مصري">مصري</option>
+                            <option value="سوري">سوري</option>
+                            <option value="أردني">أردني</option>
+                            <option value="لبناني">لبناني</option>
+                            <option value="يمني">يمني</option>
+                            <option value="سوداني">سوداني</option>
+                            <option value="جزائري">جزائري</option>
+                            <option value="مغربي">مغربي</option>
+                            <option value="تونسي">تونسي</option>
+                            <option value="إماراتي">إماراتي</option>
+                            <option value="كويتي">كويتي</option>
+                            <option value="قطري">قطري</option>
+                            <option value="عماني">عماني</option>
+                            <option value="بحريني">بحريني</option>
+                            <option value="أخرى">أخرى</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="siklif_city">المدينة *</label>
+                        <select id="siklif_city" name="city" required>
+                            <option value="">اختر المدينة</option>
+                            <option value="الرياض">الرياض</option>
+                            <option value="جدة">جدة</option>
+                            <option value="مكة">مكة المكرمة</option>
+                            <option value="المدينة">المدينة المنورة</option>
+                            <option value="الدمام">الدمام</option>
+                            <option value="الخبر">الخبر</option>
+                            <option value="الطائف">الطائف</option>
+                            <option value="تبوك">تبوك</option>
+                            <option value="أبها">أبها</option>
+                            <option value="جازان">جازان</option>
+                            <option value="حائل">حائل</option>
+                            <option value="الباحة">الباحة</option>
+                            <option value="نجران">نجران</option>
+                            <option value="الجوف">الجوف</option>
+                            <option value="القصيم">القصيم</option>
+                            <option value="الشرقية">المنطقة الشرقية</option>
+                            <option value="أخرى">أخرى</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="siklif_phone">رقم الجوال *</label>
+                        <div style="display: flex; gap: 10px;">
+                            <div style="flex: 0 0 100px;">
+                                <input type="text" value="+966" readonly style="text-align: center; background: #f8f9fa; font-weight: bold; color: #2575fc;">
+                            </div>
+                            <div style="flex: 1;">
+                                <input type="tel" id="siklif_phone" name="phone_number" required 
+                                       pattern="[0-9]{9}" 
+                                       placeholder="5XXXXXXX"
+                                       title="يرجى إدخال 9 أرقام بدون الصفر الأول">
+                            </div>
+                        </div>
+                        <small style="color: #666; font-size: 12px; margin-top: 5px; display: block;">
+                            مثال: 512345678 ← 0512345678
+                        </small>
+                    </div>
 
-  <!-- تاريخ الإجازة -->
-        <div class="form-group">
-            <label>فترة الإجازة *</label>
-            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                <div style="flex: 1; min-width: 150px;">
-                    <label for="new_vacation_start" style="font-size: 14px; color: #666;">تاريخ البداية</label>
-                    <input type="date" id="new_vacation_start" name="vacation_start" required>
-                </div>
-                <div style="flex: 1; min-width: 150px;">
-                    <label for="new_vacation_end" style="font-size: 14px; color: #666;">تاريخ النهاية</label>
-                    <input type="date" id="new_vacation_end" name="vacation_end" required>
-                </div>
-            </div>
-        </div>
-        
-        <!-- عدد الأيام -->
-        <div class="form-group">
-            <label for="new_days_count">عدد أيام الإجازة *</label>
-            <input type="number" id="new_days_count" name="vacation_days" 
-                   min="1" max="365" required 
-                   placeholder="أدخل عدد الأيام">
-        </div>
+                    <div class="form-group">
+                        <label>فترة الإجازة *</label>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <div style="flex: 1; min-width: 150px;">
+                                <label for="siklif_vacation_start" style="font-size: 14px; color: #666;">تاريخ البداية</label>
+                                <input type="date" id="siklif_vacation_start" name="vacation_start" required>
+                            </div>
+                            <div style="flex: 1; min-width: 150px;">
+                                <label for="siklif_vacation_end" style="font-size: 14px; color: #666;">تاريخ النهاية</label>
+                                <input type="date" id="siklif_vacation_end" name="vacation_end" required>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="siklif_days_count">عدد أيام الإجازة *</label>
+                        <input type="number" id="siklif_days_count" name="vacation_days" 
+                               min="1" max="365" required 
+                               placeholder="أدخل عدد الأيام">
+                    </div>
                     
                     <div class="form-group">
                         <label for="siklif_email">البريد الإلكتروني</label>
@@ -508,8 +466,10 @@
                     </div>
                 `
             },
+    
+        
 
-            certificates: {
+certificates: {
                 title: "الشهادات المهنية المعتمدة",
                 description: "اختر الشهادة المطلوبة واملأ البيانات",
                 fields: `
@@ -526,164 +486,31 @@
                         </select>
                     </div>
                     
-                    <!-- سيتم عرض النموذج المحدد هنا -->
                     <div id="certificateFormContainer"></div>
                 `
             },
 
-
-cme: {
-    title: "طلب إضافة ساعات تعليم مستمر",
-    description: "أدخل بيانات الساعات التعليمية للموافقة عليها",
-    fields: `
-        <!-- الجهة -->
-        <div class="form-group">
-            <label for="cme_institution">الجهة المانحة *</label>
-            <input type="text" id="cme_institution" name="institution" required 
-                   placeholder="اسم الجهة المنظمة للبرنامج">
-        </div>
-        
-        <!-- اسم البرنامج -->
-        <div class="form-group">
-            <label for="cme_program">اسم البرنامج *</label>
-            <input type="text" id="cme_program" name="program_name" required 
-                   placeholder="اسم البرنامج التعليمي">
-        </div>
-        
-        <!-- التاريخ -->
-        <div class="form-group">
-            <label for="cme_date">تاريخ البرنامج *</label>
-            <input type="date" id="cme_date" name="program_date" required>
-        </div>
-        
-        <!-- عدد الساعات -->
-        <div class="form-group">
-            <label for="cme_hours">عدد الساعات التعليمية *</label>
-            <input type="number" id="cme_hours" name="education_hours" 
-                   min="1" max="100" required 
-                   placeholder="عدد الساعات المعتمدة">
-        </div>
-        
-        <!-- رقم الاعتماد -->
-        <div class="form-group">
-            <label for="cme_accreditation">رقم الاعتماد *</label>
-            <input type="text" id="cme_accreditation" name="accreditation_number" required 
-                   placeholder="رقم الاعتماد الرسمي">
-        </div>
-        
-        <!-- رفع الشهادة -->
-        <div class="form-group">
-            <label for="cme_certificate">ارفاق الشهادة *</label>
-            <input type="file" id="cme_certificate" name="certificate_file" 
-                   accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" required>
-            <small style="color: #666; display: block; margin-top: 5px;">
-                المسموح: PDF, JPG, PNG, DOC (الحجم الأقصى: 10MB)
-            </small>
-        </div> 
-        
-        <!-- معلومات إضافية -->
-        <div class="form-group">
-            <label for="cme_notes">ملاحظات إضافية</label>
-            <textarea id="cme_notes" name="additional_notes" 
-                     placeholder="أي معلومات إضافية تريد إضافتها..."></textarea>
-        </div>
-        
-        <!-- معلومات المقدم -->
-        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 20px 0;">
-            <h4 style="color: #2575fc; margin-bottom: 15px;">معلومات المقدم</h4>
-            
-            <div class="form-group">
-                <label for="cme_name">الاسم الكامل *</label>
-                <input type="text" id="cme_name" name="full_name" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="cme_id">رقم الهوية *</label>
-                <input type="text" id="cme_id" name="national_id" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="cme_phone">رقم الجوال *</label>
-                <input type="tel" id="cme_phone" name="phone" required placeholder="5XXXXXXX">
-            </div>
-            
-            <div class="form-group">
-                <label for="cme_email">البريد الإلكتروني *</label>
-                <input type="email" id="cme_email" name="email" required>
-            </div>
-        </div>
-    `
-}
-            
-
-            
-        };
-
-// أضف هذا الكود بعد serviceForms
-// نماذج الشهادات التفصيلية
-const certificateForms = {
-    acls: {
-        title: "شهادة ACLS - دعم الحياة القلبية المتقدم",
-        fields: `
-            <div class="form-group">
-                <label for="acls_name">الاسم الكامل باللغة الانجليزية *</label>
-                <input type="text" id="acls_name" name="full_name" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="acls_email">البريد الإلكتروني *</label>
-                <input type="email" id="acls_email" name="email" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="acls_experience"> رقم التصنيف *</label>
-                <input type="number" id="acls_experience" name="experience_years" min="0" required>
-            </div>
-        `
-    },
-    
-    cpr: {
-        title: "شهادة CPR - إنعاش القلب والرئتين",
-        fields: `
-            <div class="form-group">
-                <label for="cpr_name">الاسم الكامل *</label>
-                <input type="text" id="cpr_name" name="full_name" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="cpr_id">رقم الهوية *</label>
-                <input type="text" id="cpr_id" name="national_id" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="cpr_phone">رقم الجوال *</label>
-                <input type="tel" id="cpr_phone" name="phone" required>
-            </div>
-cme: {
+            cme: {
                 title: "طلب إضافة ساعات تعليم مستمر",
                 description: "أدخل بيانات الساعات التعليمية للموافقة عليها",
                 fields: `
-                    <!-- الجهة -->
                     <div class="form-group">
                         <label for="cme_institution">الجهة المانحة *</label>
                         <input type="text" id="cme_institution" name="institution" required 
                                placeholder="اسم الجهة المنظمة للبرنامج">
                     </div>
                     
-                    <!-- اسم البرنامج -->
                     <div class="form-group">
                         <label for="cme_program">اسم البرنامج *</label>
                         <input type="text" id="cme_program" name="program_name" required 
                                placeholder="اسم البرنامج التعليمي">
                     </div>
                     
-                    <!-- التاريخ -->
                     <div class="form-group">
                         <label for="cme_date">تاريخ البرنامج *</label>
                         <input type="date" id="cme_date" name="program_date" required>
                     </div>
                     
-                    <!-- عدد الساعات -->
                     <div class="form-group">
                         <label for="cme_hours">عدد الساعات التعليمية *</label>
                         <input type="number" id="cme_hours" name="education_hours" 
@@ -691,21 +518,18 @@ cme: {
                                placeholder="عدد الساعات المعتمدة">
                     </div>
                     
-                    <!-- رقم الاعتماد -->
                     <div class="form-group">
                         <label for="cme_accreditation">رقم الاعتماد *</label>
                         <input type="text" id="cme_accreditation" name="accreditation_number" required 
                                placeholder="رقم الاعتماد الرسمي">
                     </div>
                     
-                    <!-- معلومات إضافية -->
                     <div class="form-group">
                         <label for="cme_notes">ملاحظات إضافية</label>
                         <textarea id="cme_notes" name="additional_notes" 
                                  placeholder="أي معلومات إضافية تريد إضافتها..."></textarea>
                     </div>
                     
-                    <!-- معلومات المقدم -->
                     <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 20px 0;">
                         <h4 style="color: #2575fc; margin-bottom: 15px;">معلومات المقدم</h4>
                         
@@ -749,7 +573,7 @@ cme: {
                     </div>
                     
                     <div class="form-group">
-                        <label for="acls_experience"> رقم التصنيف *</label>
+                        <label for="acls_experience">رقم التصنيف *</label>
                         <input type="number" id="acls_experience" name="experience_years" min="0" required>
                     </div>
                 `
@@ -852,7 +676,8 @@ cme: {
                     </div>
                 `
             },
-    nrp: {
+            
+            nrp: {
                 title: "شهادة NRP - برنامج إنعاش الوليد",
                 fields: `
                     <div class="form-group">
@@ -904,8 +729,10 @@ cme: {
                 `
             }
         };
+    
 
-        // دالة لعرض النموذج المحدد
+
+   // دالة لعرض النموذج المحدد
         function showCertificateForm(certType) {
             const container = document.getElementById('certificateFormContainer');
             
@@ -921,24 +748,6 @@ cme: {
                 container.innerHTML = '';
             }
         }
-
-        // تغيير الخدمة عند النقر على الزر
-        document.querySelectorAll('.service-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                // إزالة النشط من جميع الأزرار
-                document.querySelectorAll('.service-btn').forEach(b => {
-                    b.classList.remove('active');
-                });
-                
-                // إضافة النشط للزر المحدد
-                this.classList.add('active');
-                
-                const service = this.dataset.service;
-                
-                // تحميل النموذج المحدد
-                loadServiceForm(service);
-            });
-        });
 
         // تحميل النموذج المحدد
         function loadServiceForm(service) {
@@ -961,7 +770,25 @@ cme: {
             }
         }
 
-        // إرسال النموذج
+        // تغيير الخدمة عند النقر على الزر
+        document.querySelectorAll('.service-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // إزالة النشط من جميع الأزرار
+                document.querySelectorAll('.service-btn').forEach(b => {
+                    b.classList.remove('active');
+                });
+                
+                // إضافة النشط للزر المحدد
+                this.classList.add('active');
+                
+                const service = this.dataset.service;
+                
+                // تحميل النموذج المحدد
+                loadServiceForm(service);
+            });
+        });
+
+        // إرسال النموذج باستخدام Formspree
         document.getElementById('dynamicForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -992,7 +819,6 @@ cme: {
                     // النجاح
                     successMessage.style.display = 'block';
                     document.getElementById('dynamicForm').reset();
-                    document.getElementById('certificateFormContainer').innerHTML = '';
                 } else {
                     // الخطأ
                     throw new Error('فشل الإرسال');
@@ -1009,17 +835,14 @@ cme: {
                 loading.style.display = 'none';
             });
         });
+
+        // تحميل النموذج الأساسي عند بدء التشغيل
+        document.addEventListener('DOMContentLoaded', function() {
+            loadServiceForm('contact');
+        });
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
 
 
 
