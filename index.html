@@ -1,0 +1,879 @@
+٧<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام الخدمات الإلكترونية</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .app-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+
+
+        /* أضف هذا في قسم style */
+.certificate-form {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    border-right: 4px solid #2575fc;
+}
+
+.certificate-form h3 {
+    color: #2575fc;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+        
+        /* القائمة الجانبية */
+        .sidebar {
+            width: 280px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .sidebar h2 {
+            color: #2575fc;
+            margin-bottom: 30px;
+            text-align: center;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #2575fc;
+        }
+        
+        .service-list {
+            list-style: none;
+        }
+        
+        .service-item {
+            margin-bottom: 10px;
+        }
+        
+        .service-btn {
+            width: 100%;
+            padding: 15px;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            text-align: right;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            font-weight: 600;
+            color: #495057;
+        }
+        
+        .service-btn:hover {
+            background: #2575fc;
+            color: white;
+            border-color: #2575fc;
+            transform: translateX(-5px);
+        }
+        
+        .service-btn.active {
+            background: #2575fc;
+            color: white;
+            border-color: #2575fc;
+        }
+        
+        /* المحتوى الرئيسي */
+        .main-content {
+            flex: 1;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        header {
+            background: #2575fc;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .form-container {
+            padding: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #444;
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #2575fc;
+            box-shadow: 0 0 0 3px rgba(37, 117, 252, 0.2);
+        }
+        
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        button {
+            background: #2575fc;
+            color: white;
+            border: none;
+            padding: 14px 25px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s;
+            font-weight: 600;
+        }
+        
+        button:hover {
+            background: #1a68e8;
+        }
+        
+        button:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+        }
+        
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            display: none;
+        }
+        
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            display: none;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+            color: #2575fc;
+            font-size: 18px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: white;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .app-container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                order: 2;
+            }
+            
+            .main-content {
+                order: 1;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- القائمة الجانبية -->
+        <aside class="sidebar">
+            <h2>الخدمات الإلكترونية</h2>
+            <ul class="service-list">
+                <li class="service-item">
+                    <button class="service-btn active" data-service="contact">
+                        📞 النموذج الأساسي
+                    </button>
+                </li>
+                <li class="service-item">
+                    <button class="service-btn" data-service="siklif">
+                        🏥 طلب سكليف
+                              </li>
+                
+<li class="service-item">
+    <button class="service-btn" data-service="certificates">
+        🎓 الشهادات المهنية
+    </button>
+</li>
+
+<li class="service-item">
+    <button class="service-btn" data-service="cme">
+        📚 طلب إضافة ساعات تعليم مستمر
+    </button>
+</li>
+
+                
+            </ul>
+        </aside>
+              <main class="main-content">
+            <div class="container">
+                <header>
+                    <h1 id="formTitle">نموذج إرسال البيانات</h1>
+                    <p id="formDescription">املأ النموذج أدناه وسيتم إرسال البيانات إلى بريدي الإلكتروني</p>
+                </header>
+                
+                <div class="form-container">
+                    <form id="dynamicForm" action="https://formspree.io/f/xzzjwggd" method="POST">
+                        <div id="formFields">
+                            <!-- المحتوى الأساسي سيتم تحميله هنا -->
+                        </div>
+                        
+                        <button type="submit" id="submitBtn">
+                            إرسال البيانات
+                        </button>
+                    </form>
+                    
+                    <div class="loading" id="loading">
+                        ⏳ جاري إرسال البيانات...
+                    </div>
+                    
+                    <div class="success-message" id="successMessage">
+                        ✅ تم إرسال البيانات بنجاح! شكراً لتواصلك معنا.
+                    </div>
+                    
+                    <div class="error-message" id="errorMessage">
+                        ❌ حدث خطأ في الإرسال. يرجى المحاولة مرة أخرى.
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // تعريف النماذج المختلفة
+        const serviceForms = {
+            contact: {
+                title: "نموذج إرسال البيانات",
+                description: "املأ النموذج أدناه وسيتم إرسال البيانات إلى بريدي الإلكتروني",
+                fields: `
+                    <div class="form-group">
+                        <label for="name">الاسم الكامل</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">البريد الإلكتروني</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">رقم الهاتف</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">الموضوع</label>
+                        <select id="subject" name="subject" required>
+                            <option value="">اختر موضوع الرسالة</option>
+                            <option value="استفسار">استفسار</option>
+                            <option value="اقتراح">اقتراح</option>
+                            <option value="شكوى">شكوى</option>
+                            <option value="طلب">طلب</option>
+                            <option value="أخرى">أخرى</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">الرسالة</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                `
+            },
+            
+            siklif: {
+                title: "سكاليف (عذر طبي)",
+                description: "املأ البيانات التالية لطلب سكليف رسمي",
+                fields: `
+                    <div class="form-group">
+                        <label for="siklif_name">الاسم الكامل</label>
+                        <input type="text" id="siklif_name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="siklif_company">جهة العمل</label>
+                        <input type="text" id="siklif_company" name="company">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="siklif_id">رقم الهوية</label>
+                        <input type="number" id="siklif_id" name="id_number">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="siklif_birthdate">تاريخ الميلاد *</label>
+                        <input type="date" id="siklif_birthdate" name="birth_date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="siklif_nationality">الجنسية *</label>
+                        <select id="siklif_nationality" name="nationality" required>
+                            <option value="">اختر الجنسية</option>
+                            <option value="سعودي">سعودي</option>
+                            <option value="مصري">مصري</option>
+                            <option value="سوري">سوري</option>
+                            <option value="أردني">أردني</option>
+                            <option value="لبناني">لبناني</option>
+                            <option value="يمني">يمني</option>
+                            <option value="سوداني">سوداني</option>
+                            <option value="جزائري">جزائري</option>
+                            <option value="مغربي">مغربي</option>
+                            <option value="تونسي">تونسي</option>
+                            <option value="إماراتي">إماراتي</option>
+                            <option value="كويتي">كويتي</option>
+                            <option value="قطري">قطري</option>
+                            <option value="عماني">عماني</option>
+                            <option value="بحريني">بحريني</option>
+                            <option value="أخرى">أخرى</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="siklif_city">المدينة *</label>
+                        <select id="siklif_city" name="city" required>
+                            <option value="">اختر المدينة</option>
+                            <option value="الرياض">الرياض</option>
+                            <option value="جدة">جدة</option>
+                            <option value="مكة">مكة المكرمة</option>
+                            <option value="المدينة">المدينة المنورة</option>
+                            <option value="الدمام">الدمام</option>
+                            <option value="الخبر">الخبر</option>
+                            <option value="الطائف">الطائف</option>
+                            <option value="تبوك">تبوك</option>
+                            <option value="أبها">أبها</option>
+                            <option value="جازان">جازان</option>
+                            <option value="حائل">حائل</option>
+                            <option value="الباحة">الباحة</option>
+                            <option value="نجران">نجران</option>
+                            <option value="الجوف">الجوف</option>
+                            <option value="القصيم">القصيم</option>
+                            <option value="الشرقية">المنطقة الشرقية</option>
+                            <option value="أخرى">أخرى</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="siklif_phone">رقم الجوال *</label>
+                        <div style="display: flex; gap: 10px;">
+                            <div style="flex: 0 0 100px;">
+                                <input type="text" value="+966" readonly style="text-align: center; background: #f8f9fa; font-weight: bold; color: #2575fc;">
+                            </div>
+                            <div style="flex: 1;">
+                                <input type="tel" id="siklif_phone" name="phone_number" required 
+                                       pattern="[0-9]{9}" 
+                                       placeholder="5XXXXXXX"
+                                       title="يرجى إدخال 9 أرقام بدون الصفر الأول">
+                            </div>
+                        </div>
+                        <small style="color: #666; font-size: 12px; margin-top: 5px; display: block;">
+                            مثال: 512345678 ← 0512345678
+                        </small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>فترة الإجازة *</label>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <div style="flex: 1; min-width: 150px;">
+                                <label for="siklif_vacation_start" style="font-size: 14px; color: #666;">تاريخ البداية</label>
+                                <input type="date" id="siklif_vacation_start" name="vacation_start" required>
+                            </div>
+                            <div style="flex: 1; min-width: 150px;">
+                                <label for="siklif_vacation_end" style="font-size: 14px; color: #666;">تاريخ النهاية</label>
+                                <input type="date" id="siklif_vacation_end" name="vacation_end" required>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="siklif_days_count">عدد أيام الإجازة *</label>
+                        <input type="number" id="siklif_days_count" name="vacation_days" 
+                               min="1" max="365" required 
+                               placeholder="أدخل عدد الأيام">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="siklif_email">البريد الإلكتروني</label>
+                        <input type="email" id="siklif_email" name="email" required>
+                    </div>
+                `
+            },
+    
+        
+
+certificates: {
+                title: "الشهادات المهنية المعتمدة",
+                description: "اختر الشهادة المطلوبة واملأ البيانات",
+                fields: `
+                    <div class="form-group">
+                        <label for="cert_type">نوع الشهادة المطلوبة *</label>
+                        <select id="cert_type" name="certificate_type" required onchange="showCertificateForm(this.value)">
+                            <option value="">اختر الشهادة</option>
+                            <option value="acls">ACLS - دعم الحياة القلبية المتقدم</option>
+                            <option value="cpr">CPR - إنعاش القلب والرئتين</option>
+                            <option value="bls">BLS - دعم الحياة الأساسي</option>
+                            <option value="pals">PALS - دعم الحياة pediatric المتقدم</option>
+                            <option value="nrp">NRP - برنامج إنعاش الوليد</option>
+                            <option value="paers">PAERS - Pediatric Advanced Emergency Readiness</option>
+                        </select>
+                    </div>
+                    
+                    <div id="certificateFormContainer"></div>
+                `
+            },
+
+            cme: {
+                title: "طلب إضافة ساعات تعليم مستمر",
+                description: "أدخل بيانات الساعات التعليمية للموافقة عليها",
+                fields: `
+                    <div class="form-group">
+                        <label for="cme_institution">الجهة المانحة *</label>
+                        <input type="text" id="cme_institution" name="institution" required 
+                               placeholder="اسم الجهة المنظمة للبرنامج">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cme_program">اسم البرنامج *</label>
+                        <input type="text" id="cme_program" name="program_name" required 
+                               placeholder="اسم البرنامج التعليمي">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cme_date">تاريخ البرنامج *</label>
+                        <input type="date" id="cme_date" name="program_date" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cme_hours">عدد الساعات التعليمية *</label>
+                        <input type="number" id="cme_hours" name="education_hours" 
+                               min="1" max="100" required 
+                               placeholder="عدد الساعات المعتمدة">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cme_accreditation">رقم الاعتماد *</label>
+                        <input type="text" id="cme_accreditation" name="accreditation_number" required 
+                               placeholder="رقم الاعتماد الرسمي">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cme_notes">ملاحظات إضافية</label>
+                        <textarea id="cme_notes" name="additional_notes" 
+                                 placeholder="أي معلومات إضافية تريد إضافتها..."></textarea>
+                    </div>
+                    
+                    <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 20px 0;">
+                        <h4 style="color: #2575fc; margin-bottom: 15px;">معلومات المقدم</h4>
+                        
+                        <div class="form-group">
+                            <label for="cme_name">الاسم الكامل *</label>
+                            <input type="text" id="cme_name" name="full_name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="cme_id">رقم الهوية *</label>
+                            <input type="text" id="cme_id" name="national_id" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="cme_phone">رقم الجوال *</label>
+                            <input type="tel" id="cme_phone" name="phone" required placeholder="5XXXXXXX">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="cme_email">البريد الإلكتروني *</label>
+                            <input type="email" id="cme_email" name="email" required>
+                        </div>
+                    </div>
+                `
+            }
+        };
+
+        // نماذج الشهادات التفصيلية
+        const certificateForms = {
+            acls: {
+                title: "شهادة ACLS - دعم الحياة القلبية المتقدم",
+                fields: `
+                    <div class="form-group">
+                        <label for="acls_name">الاسم الكامل باللغة الانجليزية *</label>
+                        <input type="text" id="acls_name" name="full_name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="acls_email">البريد الإلكتروني *</label>
+                        <input type="email" id="acls_email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="acls_experience">رقم التصنيف *</label>
+                        <input type="number" id="acls_experience" name="experience_years" min="0" required>
+                    </div>
+                `
+            },
+            
+            cpr: {
+                title: "شهادة CPR - إنعاش القلب والرئتين",
+                fields: `
+                    <div class="form-group">
+                        <label for="cpr_name">الاسم الكامل *</label>
+                        <input type="text" id="cpr_name" name="full_name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cpr_id">رقم الهوية *</label>
+                        <input type="text" id="cpr_id" name="national_id" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cpr_phone">رقم الجوال *</label>
+                        <input type="tel" id="cpr_phone" name="phone" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cpr_email">البريد الإلكتروني *</label>
+                        <input type="email" id="cpr_email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cpr_course_type">نوع الدورة *</label>
+                        <select id="cpr_course_type" name="course_type" required>
+                            <option value="">اختر نوع الدورة</option>
+                            <option value="basic">CPR أساسي</option>
+                            <option value="advanced">CPR متقدم</option>
+                            <option value="healthcare">CPR لمقدمي الرعاية الصحية</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cpr_previous">هل لديك شهادة CPR سابقة؟</label>
+                        <select id="cpr_previous" name="previous_cert">
+                            <option value="no">لا</option>
+                            <option value="yes">نعم</option>
+                        </select>
+                    </div>
+                `
+            },
+            
+            bls: {
+                title: "شهادة BLS - دعم الحياة الأساسي",
+                fields: `
+                    <div class="form-group">
+                        <label for="bls_name">الاسم الكامل *</label>
+                        <input type="text" id="bls_name" name="full_name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bls_id">رقم الهوية *</label>
+                        <input type="text" id="bls_id" name="national_id" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bls_phone">رقم الجوال *</label>
+                        <input type="tel" id="bls_phone" name="phone" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bls_qualification">المؤهل العلمي *</label>
+                        <input type="text" id="bls_qualification" name="qualification" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bls_work">جهة العمل *</label>
+                        <input type="text" id="bls_work" name="workplace" required>
+                    </div>
+                `
+            },
+            
+            pals: {
+                title: "شهادة PALS - دعم الحياة Pediatric المتقدم",
+                fields: `
+                    <div class="form-group">
+                        <label for="pals_name">الاسم الكامل *</label>
+                        <input type="text" id="pals_name" name="full_name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="pals_id">رقم الهوية *</label>
+                        <input type="text" id="pals_id" name="national_id" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="pals_specialty">التخصص الطبي *</label>
+                        <input type="text" id="pals_specialty" name="medical_specialty" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="pals_license">رقم الترخيص الطبي *</label>
+                        <input type="text" id="pals_license" name="medical_license" required>
+                    </div>
+                `
+            },
+            
+            nrp: {
+                title: "شهادة NRP - برنامج إنعاش الوليد",
+                fields: `
+                    <div class="form-group">
+                        <label for="nrp_name">الاسم الكامل *</label>
+                        <input type="text" id="nrp_name" name="full_name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="nrp_position">المنصب *</label>
+                        <select id="nrp_position" name="position" required>
+                            <option value="">اختر المنصب</option>
+                            <option value="doctor">طبيب</option>
+                            <option value="nurse">ممرض/ممرضة</option>
+                            <option value="midwife">قابلة</option>
+                            <option value="respiratory">أخصائي تنفسي</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="nrp_department">القسم *</label>
+                        <input type="text" id="nrp_department" name="department" required placeholder="الولادة/العناية المركزة للأطفال">
+                    </div>
+                `
+            },
+            
+            paers: {
+                title: "شهادة PAERS - Pediatric Advanced Emergency Readiness",
+                fields: `
+                    <div class="form-group">
+                        <label for="paers_name">الاسم الكامل *</label>
+                        <input type="text" id="paers_name" name="full_name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="paers_emergency">نوع الطوارئ *</label>
+                        <select id="paers_emergency" name="emergency_type" required>
+                            <option value="">اختر نوع الطوارئ</option>
+                            <option value="trauma">صدمة</option>
+                            <option value="respiratory">تنفسي</option>
+                            <option value="cardiac">قلبي</option>
+                            <option value="neurological">عصبي</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="paers_experience">خبرة في طب الأطفال (سنوات) *</label>
+                        <input type="number" id="paers_experience" name="pediatric_experience" min="0" required>
+                    </div>
+                `
+            }
+        };
+    
+
+
+   // دالة لعرض النموذج المحدد
+        function showCertificateForm(certType) {
+            const container = document.getElementById('certificateFormContainer');
+            
+            if (certType && certificateForms[certType]) {
+                const formData = certificateForms[certType];
+                container.innerHTML = `
+                    <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-top: 20px; border-right: 4px solid #2575fc;">
+                        <h3 style="color: #2575fc; margin-bottom: 15px;">${formData.title}</h3>
+                        ${formData.fields}
+                    </div>
+                `;
+            } else {
+                container.innerHTML = '';
+            }
+        }
+
+        // تحميل النموذج المحدد
+        function loadServiceForm(service) {
+            const formData = serviceForms[service];
+            
+            if (formData) {
+                // تحديث العنوان والوصف
+                document.getElementById('formTitle').textContent = formData.title;
+                document.getElementById('formDescription').textContent = formData.description;
+                
+                // تحديث الحقول
+                document.getElementById('formFields').innerHTML = formData.fields;
+                
+                // تحديث نص زر الإرسال
+                document.getElementById('submitBtn').textContent = `إرسال ${formData.title}`;
+                
+                // إخفاء الرسائل
+                document.getElementById('successMessage').style.display = 'none';
+                document.getElementById('errorMessage').style.display = 'none';
+            }
+        }
+
+        // تغيير الخدمة عند النقر على الزر
+        document.querySelectorAll('.service-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // إزالة النشط من جميع الأزرار
+                document.querySelectorAll('.service-btn').forEach(b => {
+                    b.classList.remove('active');
+                });
+                
+                // إضافة النشط للزر المحدد
+                this.classList.add('active');
+                
+                const service = this.dataset.service;
+                
+                // تحميل النموذج المحدد
+                loadServiceForm(service);
+            });
+        });
+
+        // إرسال النموذج باستخدام Formspree
+        // إرسال النموذج باستخدام Formspree
+document.getElementById('dynamicForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const submitBtn = document.getElementById('submitBtn');
+    const loading = document.getElementById('loading');
+    const successMessage = document.getElementById('successMessage');
+    const errorMessage = document.getElementById('errorMessage');
+    
+    // إخفاء جميع الرسائل
+    successMessage.style.display = 'none';
+    errorMessage.style.display = 'none';
+    
+    // إظهار حالة التحميل
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'جاري الإرسال...';
+    loading.style.display = 'block';
+    
+    // جمع البيانات من النموذج
+    const formData = new FormData(this);
+    
+    // إرسال البيانات باستخدام Fetch API
+    fetch(this.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => {
+        console.log('Response status:', response.status);
+        if (response.ok) {
+            return response.json();
+        } else {
+            throw new Error('فشل الإرسال: ' + response.status);
+        }
+    })
+    .then(data => {
+        console.log('Success:', data);
+        successMessage.style.display = 'block';
+        document.getElementById('dynamicForm').reset();
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        errorMessage.style.display = 'block';
+    })
+    .finally(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = `إرسال ${document.getElementById('formTitle').textContent}`;
+        loading.style.display = 'none';
+    });
+});
+        // تحميل النموذج الأساسي عند بدء التشغيل
+        document.addEventListener('DOMContentLoaded', function() {
+            loadServiceForm('contact');
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
