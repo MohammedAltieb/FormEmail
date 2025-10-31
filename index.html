@@ -124,14 +124,6 @@
             padding: 30px 20px;
             text-align: center;
 
-
-
-
-              <div style="position: absolute; top: 15px; left: 20px;">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxLpQym49P1vgDtO999Wg7bRlbFUokGGUUvw&usqp=CAU" 
-             alt="شعار ممارس بلس - الهيئة السعودية للتخصصات الصحية" 
-             style="height: 50px; border-radius: 5px;">
-    </div>
         }
     
         
@@ -287,7 +279,20 @@
         </aside>
               <main class="main-content">
             <div class="container">
-                <header>
+                
+<header style="position: relative;">
+    <!-- الشعار مع تأثيرات محسنة -->
+    <div style="position: absolute; top: 15px; left: 20px; background: white; padding: 5px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxLpQym49P1vgDtO999Wg7bRlbFUokGGUUvw&usqp=CAU" 
+             alt="شعار ممارس بلس" 
+             style="height: 50px; display: block;">
+    </div>
+    
+    <h1 style="margin-top: 15px; padding-right: 180px;">نموذج إرسال البيانات</h1>
+    <p style="padding-right: 180px;">املأ النموذج أدناه وسيتم إرسال البيانات إلى بريدي الإلكتروني</p>
+
+
+                    
                     <h1 id="formTitle">نموذج إرسال البيانات</h1>
                     <p id="formDescription">املأ النموذج أدناه وسيتم إرسال البيانات إلى بريدي الإلكتروني</p>
                 </header>
@@ -858,6 +863,7 @@ document.getElementById('dynamicForm').addEventListener('submit', function(e) {
     </script>
 </body>
 </html>
+
 
 
 
